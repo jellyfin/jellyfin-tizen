@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://jellyfin.org/Jellyfin" version="0.1.0" viewmodes="fullscreen">
+    <access origin="*" subdomains="true"></access>
+    <tizen:application id="AprZAARz4r.Jellyfin" package="AprZAARz4r" required_version="3.0"/>
+    <author href="http://jellyfin.org" email="apps@jellyfin.org">Jellyfin</author>
+    <content src="index.html"/>
+    <description>Jellyfin for Samsung Smart TV (Tizen).</description>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>Jellyfin</name>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:profile name="tv"/>
+    <tizen:setting screen-orientation="auto-rotation" context-menu="enable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+</widget>
