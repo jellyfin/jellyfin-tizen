@@ -21,8 +21,6 @@ window.addEventListener('load', function() {
             '417': 'fastforward'
         };
 
-        var isRestored;
-        var lastActiveElement;
         var historyStartup;
         var historyDepth = 0;
         var exitPromise;
@@ -57,62 +55,6 @@ window.addEventListener('load', function() {
             }
         });
 
-        document.addEventListener('click', function() {
-            lastActiveElement = document.activeElement;
-        });
-
-        document.addEventListener('viewhide', function() {
-            lastActiveElement = document.activeElement;
-        });
-
-        function onPageLoad() {
-            console.debug('onPageLoad ' + window.location.href + ' isRestored=' + isRestored);
-
-            if (isRestored) {
-                return;
-            }
-
-            var view = viewManager.currentView() || document.body;
-
-            var element = lastActiveElement;
-            lastActiveElement = null;
-
-            // These elements are recreated
-            if (element) {
-                if (element.classList.contains('btnPreviousPage')) {
-                    element = view.querySelector('.btnPreviousPage');
-                } else if (element.classList.contains('btnNextPage')) {
-                    element = view.querySelector('.btnNextPage');
-                }
-            }
-
-            if (element && focusManager.isCurrentlyFocusable(element)) {
-                focusManager.focus(element);
-            } else {
-                element = focusManager.autoFocus(view);
-            }
-        }
-
-        // Starts listening for changes in the '.loading-spinner' HTML element
-        function installMutationObserver() {
-            var mutationObserver = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    console.debug(mutation.type);
-                    if (mutation.target.classList.contains('hide')) {
-                        onPageLoad();
-                    }
-                });
-            });
-
-            var spinner = document.querySelector('.loading-spinner');
-
-            if (spinner) {
-                mutationObserver.observe(spinner, { attributes : true });
-                document.removeEventListener('viewshow', installMutationObserver);
-            }
-        }
-        document.addEventListener('viewshow', installMutationObserver);
-
         window.addEventListener('pushState', function(e) {
             // Reset history on some pages
 
@@ -135,13 +77,10 @@ window.addEventListener('load', function() {
             }
 
             historyDepth++;
-
-            isRestored = false;
         });
 
         window.addEventListener('popstate', function() {
             historyDepth--;
-            isRestored = true;
         });
 
         // Add 'pushState' and 'replaceState' events
