@@ -7,6 +7,7 @@ window.addEventListener('load', function() {
     //console.log(JSON.stringify(tizen.tvinputdevice.getSupportedKeys()));
 
     tizen.tvinputdevice.registerKey('MediaPlay');
+    tizen.tvinputdevice.registerKey('MediaPause');
     tizen.tvinputdevice.registerKey('MediaTrackPrevious');
     tizen.tvinputdevice.registerKey('MediaTrackNext');
     tizen.tvinputdevice.registerKey('MediaRewind');
@@ -16,7 +17,8 @@ window.addEventListener('load', function() {
 
         const commands = {
             '10009': 'back',
-            '415': 'playpause',
+            '19': 'pause',
+            '415': 'play',
             '10232': 'previoustrack',
             '10233': 'nexttrack',
             '412': 'rewind',
