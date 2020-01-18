@@ -28,14 +28,12 @@ If any changes are made to `jellyfin-web/`, the `www/` directory will need to be
 JELLYFIN_WEB_DIR=../jellyfin-web/src npx gulp
 ```
 
-> If `NODE_ENV=development` is set in the environment, then the source files will be copied without being minified.
-
 > The `JELLYFIN_WEB_DIR` environment variable can be used to override the location of `jellyfin-web`.
 
 ### Build WGT
 
 ```sh
-tizen build-web -e ".*" -e gulpfile.js
+tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
 tizen package -t wgt -o . -- .buildResult
 ```
 

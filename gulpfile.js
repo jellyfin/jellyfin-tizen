@@ -2,30 +2,12 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var del = require('del');
 var dom = require('gulp-dom');
-var uglifyes = require('uglify-es');
-var composer = require('gulp-uglify/composer');
-var uglify = composer(uglifyes, console);
+var path = require('path');
 
-// Check the NODE_ENV environment variable
-var isDev = process.env.NODE_ENV === 'development';
 // Allow overriding of jellyfin-web directory
 var WEB_DIR = process.env.JELLYFIN_WEB_DIR || 'node_modules/jellyfin-web/dist';
+WEB_DIR = path.resolve(WEB_DIR);
 console.info('Using jellyfin-web from', WEB_DIR);
-
-// Skip minification for development builds or minified files
-var compress = !isDev && [
-    '**/*',
-    '!**/*min.*',
-    '!**/*hls.js',
-    // Temporarily exclude apiclient until updated
-    '!bower_components/emby-apiclient/**/*.js'
-];
-
-var uglifyOptions = {
-    compress: {
-        drop_console: true
-    }
-};
 
 var paths = {
     assets: {
