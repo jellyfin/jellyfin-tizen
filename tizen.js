@@ -3,9 +3,6 @@
 console.log('Tizen adapter');
 
 window.addEventListener('load', function() {
-
-    //console.log(JSON.stringify(tizen.tvinputdevice.getSupportedKeys()));
-
     tizen.tvinputdevice.registerKey('MediaPlay');
     tizen.tvinputdevice.registerKey('MediaPause');
     tizen.tvinputdevice.registerKey('MediaTrackPrevious');
@@ -14,7 +11,6 @@ window.addEventListener('load', function() {
     tizen.tvinputdevice.registerKey('MediaFastForward');
 
     require(['inputManager', 'focusManager', 'viewManager', 'appRouter', 'actionsheet'], function(inputManager, focusManager, viewManager, appRouter, actionsheet) {
-
         const commands = {
             '10009': 'back',
             '19': 'pause',
@@ -31,22 +27,10 @@ window.addEventListener('load', function() {
         var historyDepth = 0;
         var exitPromise;
 
-        //document.addEventListener('keypress', function(e) {
-        //    console.log('keypress');
-        //});
-
-        //document.addEventListener('keyup', function(e) {
-        //    console.log('keyup');
-        //});
-
         document.addEventListener('keydown', function(e) {
-            //console.log('keydown: keyCode: ' + e.keyCode + ' key: ' + e.key + ' location: ' + e.location);
-
             var command = commands[e.keyCode];
 
             if (command) {
-                //console.log('command: ' + command);
-
                 if (command === 'back' && historyDepth < 2 && !exitPromise) {
                     exitPromise = actionsheet.show({
                         title: Globalize.translate('Exit?'),
@@ -130,7 +114,6 @@ window.addEventListener('load', function() {
         document.addEventListener('viewshow', installMutationObserver);
 
         window.addEventListener('pushState', function(e) {
-
             // Reset history on some pages
 
             var path = e.arguments && e.arguments[2] ? e.arguments[2] : '';
@@ -154,14 +137,11 @@ window.addEventListener('load', function() {
             historyDepth++;
 
             isRestored = false;
-
-            //console.log('history: ' + historyDepth + ', ' + historyStartup);
         });
 
         window.addEventListener('popstate', function() {
             historyDepth--;
             isRestored = true;
-            //console.log('history: ' + historyDepth + ', ' + historyStartup);
         });
 
         // Add 'pushState' and 'replaceState' events
