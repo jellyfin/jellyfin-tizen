@@ -15,20 +15,26 @@
    ```sh
    git clone https://github.com/jellyfin/jellyfin-web.git
    ```
-5. Go to Jellyfin Tizen directory.
-   ```sh
-   cd jellyfin-tizen
-   ```
+
+### Build Jellyfin Web
+
+```sh
+cd jellyfin-web
+yarn install
+```
+
+If any changes are made to `jellyfin-web/`, the `jellyfin-web/dist/` directory will need to be rebuilt using the command above.
 
 ### Prepare Interface
 
-If any changes are made to `jellyfin-web/`, the `www/` directory will need to be rebuilt using the following command.
-
 ```sh
-JELLYFIN_WEB_DIR=../jellyfin-web/src npx gulp
+cd jellyfin-tizen
+JELLYFIN_WEB_DIR=../jellyfin-web/dist npx gulp
 ```
 
 > The `JELLYFIN_WEB_DIR` environment variable can be used to override the location of `jellyfin-web`.
+
+If any changes are made to `jellyfin-web/dist/`, the `www/` directory will need to be rebuilt using the command above.
 
 ### Build WGT
 
