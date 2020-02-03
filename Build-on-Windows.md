@@ -1,3 +1,5 @@
+_Commands in this guide are for Windows Command Prompt or Batch files. Most of them will work in Windows PowerShell. Special cases will be in collapsible command blocks._
+
 ### Prerequisites
 * Oracle JDK 8 <sup>_for Tizen Studio_</sup>
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
@@ -41,6 +43,15 @@ cd jellyfin-tizen
 set JELLYFIN_WEB_DIR=C:\jellyfin\jellyfin-web\dist
 yarn install
 ```
+<details>
+    <summary><i>For Windows PowerShell</i></summary>
+
+```powershell
+cd jellyfin-tizen
+$env:JELLYFIN_WEB_DIR="C:\jellyfin\jellyfin-web\dist"
+yarn install
+```
+</details>
 
 > You should get `jellyfin-tizen/www/` directory.
 
