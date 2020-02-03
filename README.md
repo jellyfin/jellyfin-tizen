@@ -9,7 +9,7 @@
 2. Setup Samsung certificate (need Samsung account).
 3. Clone or download this repository.
    ```sh
-   git clone https://github.com/jellyfin/jellyfin-tizen.git
+   git clone https://github.com/dmitrylyzo/jellyfin-tizen.git
    ```
 4. Clone or download Jellyfin Web repository.
    ```sh
