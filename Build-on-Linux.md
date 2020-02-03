@@ -20,7 +20,7 @@ _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on
    ```
 6. Clone or download Jellyfin Tizen (this) repository.
    ```sh
-   git clone https://github.com/jellyfin/jellyfin-tizen.git
+   git clone https://github.com/dmitrylyzo/jellyfin-tizen.git
    ```
 
 ### Build Jellyfin Web
