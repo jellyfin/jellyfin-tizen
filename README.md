@@ -2,7 +2,7 @@
 <h3 align="center">Part of the <a href="https://jellyfin.media">Jellyfin Project</a></h3>
 
 ## Build Process
-_Also look [Wiki](https://github.com/dmitrylyzo/jellyfin-tizen/wiki)._
+_Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ### Prerequisites
 * Oracle JDK 8 <sup>_for Tizen Studio_</sup>
@@ -24,7 +24,7 @@ _Also look [Wiki](https://github.com/dmitrylyzo/jellyfin-tizen/wiki)._
    ```
 6. Clone or download Jellyfin Tizen (this) repository.
    ```sh
-   git clone https://github.com/dmitrylyzo/jellyfin-tizen.git
+   git clone https://github.com/jellyfin/jellyfin-tizen.git
    ```
 
 ### Build Jellyfin Web

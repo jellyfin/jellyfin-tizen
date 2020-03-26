@@ -4,7 +4,7 @@
   "description": "Jellyfin for Samsung Smart TV (Tizen)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmitrylyzo/jellyfin-tizen.git"
+    "url": "git+https://github.com/jellyfin/jellyfin-tizen.git"
   },
   "scripts": {
     "postinstall": "gulp"
