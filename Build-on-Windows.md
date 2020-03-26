@@ -22,7 +22,7 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
    ```
 6. Clone or download Jellyfin Tizen (this) repository.
    ```bat
-   git clone https://github.com/dmitrylyzo/jellyfin-tizen.git
+   git clone https://github.com/jellyfin/jellyfin-tizen.git
    ```
 
 ### Build Jellyfin Web
