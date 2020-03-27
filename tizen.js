@@ -40,7 +40,9 @@
         'otherapppromotions',
         'targetblank',
         'screensaver',
-        'multiserver'
+        'multiserver',
+        'subtitleappearancesettings',
+        'subtitleburnsettings'
     ];
 
     function postMessage() {
