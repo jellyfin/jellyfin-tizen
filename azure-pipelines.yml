@@ -1,0 +1,39 @@
+trigger:
+- master
+
+jobs:
+  - job: build_web
+    displayName: Build Jellyfin-web
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - checkout: self
+        clean: true
+        submodules: true
+        persistCredentials: true
+      - task: CmdLine@2
+        displayName: Check out Jellyfin Web
+        inputs:
+          script: |
+            git clone --single-branch --branch master --depth=1 https://github.com/jellyfin/jellyfin-web.git $(Agent.TempDirectory)/jellyfin-web
+      - task: UseNode@1
+        displayName: Install Node
+        inputs:
+          version: '12.x'
+      - task: CmdLine@2
+        displayName: Install Jellyfin Web
+        inputs:
+          script: |
+            yarn install
+          workingDirectory: $(Agent.TempDirectory)/jellyfin-web
+          failOnStderr: false
+
+      - task: CmdLine@2
+        displayName: Install Jellyfin Tizen
+        inputs:
+          script: | 
+            JELLYFIN_WEB_DIR=$(Agent.TempDirectory)/jellyfin-web/dist yarn install
+          failOnStderr: false
+
+
+ 
