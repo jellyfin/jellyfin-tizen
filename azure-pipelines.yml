@@ -35,5 +35,46 @@ jobs:
             JELLYFIN_WEB_DIR=$(Agent.TempDirectory)/jellyfin-web/dist yarn install
           failOnStderr: false
 
+      - task: CmdLine@2
+        displayName: Setup Tizen Studio
+        inputs:
+          script: | 
+            export TIZEN_HOME=$(Agent.TempDirectory)/tizen
+            export TIZEN_CLI_INSTALLER_URL=http://download.tizen.org/sdk/Installer/tizen-studio_3.7/web-cli_Tizen_Studio_3.7_ubuntu-64.bin
+            export TIZEN_STUDIO=$TIZEN_HOME/tizen-studio
+            
+            mkdir -p $TIZEN_HOME
+            cd $TIZEN_HOME
 
- 
+            INSTALLER=$(Agent.TempDirectory)/$(basename "$TIZEN_CLI_INSTALLER_URL") \
+              && curl "$TIZEN_CLI_INSTALLER_URL" > "$INSTALLER" \
+              && chmod 755 "$INSTALLER" \
+              && "$INSTALLER" --no-java-check --accept-license $TIZEN_STUDIO \
+              && rm "$INSTALLER" \
+              && cd $TIZEN_STUDIO/tools/certificate-generator/patches/partner \
+              && ./patch.sh $TIZEN_STUDIO \
+              && rm -rf \
+                $TIZEN_HOME/.package-manager \
+                $TIZEN_HOME/tizen-studio/license \
+                $TIZEN_HOME/tizen-studio/package-manager            
+          failOnStderr: false
+
+      - task: CmdLine@2
+        displayName: Setup certificates
+        inputs:
+          script: |
+            export PATH=$TIZEN_HOME/tizen-studio/tools:$TIZEN_HOME/tizen-studio/tools/ide/bin:$PATH
+            echo $PATH
+            ls $TIZEN_HOME/tizen-studio/tools
+            ls $TIZEN_HOME/tizen-studio/tools/ide/bin
+            export CERTIFICATE_DIR=$(Agent.TempDirectory)/certificates
+            mkdir -p $CERTIFICATE_DIR
+            echo $(CERTIFICATE) | base64 --decode > $CERTIFICATE_DIR/certificate.p12
+            tizen security-profiles add -n DebugProfile -a $CERTIFICATE_DIR/certificate.p12 -p 1234
+
+      - task: CmdLine@2
+        displayName: Package build
+        inputs:
+          script: |
+            tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "jellyfin-web/*" -e "package*.json" -e "yarn.lock"
+            tizen package -t wgt -s debug -- .buildResult
