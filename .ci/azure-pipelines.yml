@@ -16,34 +16,21 @@ jobs:
         displayName: Setup directories and variables
         inputs:
           script: |
-            echo "##vso[task.setvariable variable=JELLYFIN_WEB_DIR]$(Agent.TempDirectory)/jellyfin-web"
             echo "##vso[task.setvariable variable=TIZEN_HOME_DIR]$(Agent.TempDirectory)/tizen"
             echo "##vso[task.setvariable variable=CERTIFICATE_DIR]$(Agent.TempDirectory)/certificates"
           failOnStderr: false
 
-      - task: CmdLine@2
-        displayName: Check out Jellyfin Web
-        inputs:
-          script: |
-            git clone --single-branch --branch master --depth=1 https://github.com/jellyfin/jellyfin-web.git $JELLYFIN_WEB_DIR
       - task: UseNode@1
         displayName: Install Node
         inputs:
           version: '12.x'
-      - task: CmdLine@2
-        displayName: Install Jellyfin Web
-        inputs:
-          script: |
-            yarn install
-          workingDirectory: $(JELLYFIN_WEB_DIR)
-          failOnStderr: false
 
       - task: CmdLine@2
         displayName: Install Jellyfin Tizen
         inputs:
           script: | 
             yarn install
-            JELLYFIN_WEB_DIR=$JELLYFIN_WEB_DIR/dist yarn build
+            JELLYFIN_WEB_DIR=./node_modules/jellyfin-web/dist yarn build
           failOnStderr: false
 
       - task: CmdLine@2
