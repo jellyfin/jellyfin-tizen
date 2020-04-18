@@ -42,7 +42,8 @@ jobs:
         displayName: Install Jellyfin Tizen
         inputs:
           script: | 
-            JELLYFIN_WEB_DIR=$JELLYFIN_WEB_DIR/dist yarn install
+            yarn install
+            JELLYFIN_WEB_DIR=$JELLYFIN_WEB_DIR/dist yarn build
           failOnStderr: false
 
       - task: CmdLine@2
