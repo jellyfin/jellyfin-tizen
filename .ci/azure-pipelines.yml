@@ -1,9 +1,11 @@
 trigger:
-- master
+  branches:
+    include:
+    - refs/tags/*
 
 jobs:
-  - job: build_web
-    displayName: Build Jellyfin-web
+  - job: build
+    displayName: Build
     pool:
       vmImage: "ubuntu-latest"
     steps:
@@ -55,7 +57,7 @@ jobs:
                 $TIZEN_HOME_DIR/tizen-studio/license \
                 $TIZEN_HOME_DIR/tizen-studio/package-manager            
           failOnStderr: false
-
+  
       - task: CmdLine@2
         displayName: Setup certificates
         inputs:
@@ -90,6 +92,7 @@ jobs:
           repositoryName: '$(Build.Repository.Name)'
           action: 'create'
           target: '$(Build.SourceVersion)'
-          tagSource: 'userSpecifiedTag'
-          tag: '$(Build.BuildNumber)'
+          tagSource: 'gitTag'
+          tagPattern: 'v[0-9]*\S*'
+          assets: '$(Build.ArtifactStagingDirectory)/*.wgt'
           addChangeLog: false
