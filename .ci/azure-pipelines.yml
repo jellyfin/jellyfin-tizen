@@ -67,7 +67,7 @@ jobs:
             mkdir -p $CERTIFICATE_DIR
             
             echo $(CERTIFICATE) | base64 --decode > $CERTIFICATE_DIR/certificate.p12
-            tizen security-profiles add -n DebugProfile -a $CERTIFICATE_DIR/certificate.p12 -p 1234
+            tizen security-profiles add -n DebugProfile -a $CERTIFICATE_DIR/certificate.p12 -p $CERTIFICATE_PASSWORD
 
       - task: CmdLine@2
         displayName: Package build
