@@ -70,19 +70,24 @@ jobs:
         inputs:
           script: |
             export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
-
             mkdir -p $CERTIFICATE_DIR
-            
             echo $(CERTIFICATE) | base64 --decode > $CERTIFICATE_DIR/certificate.p12
-            tizen security-profiles add -n DebugProfile -a $CERTIFICATE_DIR/certificate.p12 -p $CERTIFICATE_PASSWORD
+            tizen security-profiles add -n DebugProfile -a $CERTIFICATE_DIR/certificate.p12 -p $(CERTIFICATE_PASSWORD)
+            tizen cli-config "profiles.path=$TIZEN_HOME_DIR/tizen-studio-data/profile/profiles.xml"
+
+      - task: CmdLine@2
+        displayName: Build Tizen web
+        inputs:
+          script: |
+            export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
+            tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "jellyfin-web/*" -e "package*.json" -e "yarn.lock"
 
       - task: CmdLine@2
         displayName: Package build
         inputs:
           script: |
             export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
-            tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "jellyfin-web/*" -e "package*.json" -e "yarn.lock"
-            tizen package -t wgt -s DebugProfile -- .buildResult
+            tizen package -t wgt -s debug -- .buildResult
 
       - task: CopyFiles@2
         displayName: Staging artifacts
@@ -95,7 +100,7 @@ jobs:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Release'
         inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)/*.wgt'
+          targetPath: '$(Build.ArtifactStagingDirectory)/Jellyfin.wgt'
           artifactName: 'jellyfin-tizen-debug'
   
   - job: deploy
