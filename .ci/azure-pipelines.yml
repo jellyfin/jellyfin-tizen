@@ -1,7 +1,17 @@
+
 trigger:
+  batch: true
   branches:
     include:
-    - refs/tags/*
+    - '*'
+  tags:
+    include:
+    - '*'
+
+pr:
+  branches:
+    include:
+    - '*'
 
 jobs:
   - job: build
@@ -82,6 +92,23 @@ jobs:
           TargetFolder: '$(Build.ArtifactStagingDirectory)'
           OverWrite: true
 
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Release'
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)/*.wgt'
+          artifactName: 'jellyfin-tizen-debug'
+  
+  - job: deploy
+    displayName: Deploy
+    dependsOn: build
+    condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: jellyfin-tizen-debug
+     
       - task: GitHubRelease@1
         displayName: Creating Github Release
         inputs:
@@ -91,5 +118,5 @@ jobs:
           target: '$(Build.SourceVersion)'
           tagSource: 'gitTag'
           tagPattern: 'v[0-9]*\S*'
-          assets: '$(Build.ArtifactStagingDirectory)/*.wgt'
+          assets: 'jellyfin-tizen-debug/*.wgt'
           addChangeLog: false
