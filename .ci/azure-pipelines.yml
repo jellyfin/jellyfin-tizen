@@ -45,17 +45,14 @@ jobs:
             mkdir -p $TIZEN_HOME_DIR
             cd $TIZEN_HOME_DIR
 
-            INSTALLER=$(Agent.TempDirectory)/$(basename "$TIZEN_CLI_INSTALLER_URL") \
-              && curl "$TIZEN_CLI_INSTALLER_URL" > "$INSTALLER" \
-              && chmod 755 "$INSTALLER" \
-              && "$INSTALLER" --no-java-check --accept-license $TIZEN_STUDIO \
-              && rm "$INSTALLER" \
-              && cd $TIZEN_STUDIO/tools/certificate-generator/patches/partner \
-              && ./patch.sh $TIZEN_STUDIO \
-              && rm -rf \
-                $TIZEN_HOME_DIR/.package-manager \
-                $TIZEN_HOME_DIR/tizen-studio/license \
-                $TIZEN_HOME_DIR/tizen-studio/package-manager            
+            export INSTALLER=$(Agent.TempDirectory)/$(basename "$TIZEN_CLI_INSTALLER_URL")
+            curl "$TIZEN_CLI_INSTALLER_URL" > "$INSTALLER"
+            chmod 755 "$INSTALLER"
+            "$INSTALLER" --no-java-check --accept-license $TIZEN_STUDIO
+            rm "$INSTALLER"
+            cd $TIZEN_STUDIO/tools/certificate-generator/patches/partner
+            ./patch.sh $TIZEN_STUDIO
+            rm -rf $TIZEN_HOME_DIR/.package-manager $TIZEN_HOME_DIR/tizen-studio/license $TIZEN_HOME_DIR/tizen-studio/package-manager            
           failOnStderr: false
   
       - task: CmdLine@2
