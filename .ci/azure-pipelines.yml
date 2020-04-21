@@ -72,7 +72,7 @@ jobs:
           script: |
             export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
             tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "jellyfin-web/*" -e "package*.json" -e "yarn.lock"
-            tizen package -t wgt -s debug -- .buildResult
+            tizen package -t wgt -s DebugProfile -- .buildResult
 
       - task: CopyFiles@2
         displayName: Staging artifacts
