@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://jellyfin.org/Jellyfin" version="0.1.0" viewmodes="fullscreen">
     <access origin="*" subdomains="true"></access>
-    <tizen:application id="AprZAARz4r.Jellyfin" package="AprZAARz4r" required_version="3.0"/>
+    <tizen:application id="AprZAARz4r.Jellyfin" package="AprZAARz4r" required_version="2.3"/>
     <author href="http://jellyfin.org" email="apps@jellyfin.org">Jellyfin</author>
     <content src="index.html"/>
     <description>Jellyfin for Samsung Smart TV (Tizen).</description>
