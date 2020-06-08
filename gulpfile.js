@@ -46,22 +46,32 @@ function modifyIndex() {
             meta.setAttribute('content', 'default-src * \'self\' \'unsafe-inline\' \'unsafe-eval\' data: gap: file: filesystem: ws: wss:;');
             this.head.appendChild(meta);
 
+            // Search for injected apploader
+            let apploader = this.body.querySelector('script[src*="apploader"]');
+
+            if (!apploader) {
+                // inject apploader.js
+                apploader = this.createElement('script');
+                apploader.setAttribute('src', 'scripts/apploader.js');
+                apploader.setAttribute('defer', '');
+                this.body.appendChild(apploader);
+            } else {
+                console.debug('Found injected apploader');
+                apploader.setAttribute('defer', '');
+            }
+
+            const injectTarget = apploader.parentNode;
+
             // inject appMode script
             var appMode = this.createElement('script');
             appMode.text = 'window.appMode=\'cordova\';';
-            this.body.appendChild(appMode);
+            injectTarget.insertBefore(appMode, apploader);
 
             // inject tizen.js
             var tizen = this.createElement('script');
             tizen.setAttribute('src', '../tizen.js');
             tizen.setAttribute('defer', '');
-            this.body.appendChild(tizen);
-
-            // inject apploader.js
-            var apploader = this.createElement('script');
-            apploader.setAttribute('src', 'scripts/apploader.js');
-            apploader.setAttribute('defer', '');
-            this.body.appendChild(apploader);
+            injectTarget.insertBefore(tizen, apploader);
 
             return this;
         }))
