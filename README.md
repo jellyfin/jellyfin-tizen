@@ -5,7 +5,6 @@
 _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ### Prerequisites
-* Oracle JDK 8 <sup>_for Tizen Studio_</sup>
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
 * Node.js
