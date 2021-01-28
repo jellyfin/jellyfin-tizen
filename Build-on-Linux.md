@@ -1,7 +1,6 @@
 _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on other distros if its requirements are met._
 
 ### Prerequisites
-* Oracle JDK 8 <sup>_for Tizen Studio_</sup>
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Node.js
 * Yarn

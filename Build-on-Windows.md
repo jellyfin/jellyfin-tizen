@@ -1,7 +1,6 @@
 _Commands in this guide are for Windows Command Prompt or Batch files. Most of them will work in Windows PowerShell. Special cases will be in collapsible command blocks._
 
 ### Prerequisites
-* Oracle JDK 8 <sup>_for Tizen Studio_</sup>
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Node.js
 * Yarn
