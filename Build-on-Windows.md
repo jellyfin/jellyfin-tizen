@@ -29,8 +29,16 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 
 ```bat
 cd jellyfin-web
+npm ci
+```
+<details>
+    <summary><i>For pre-10.7</i></summary>
+
+```bat
+cd jellyfin-web
 yarn install
 ```
+</details>
 
 > You should get `jellyfin-web/dist/` directory.
 

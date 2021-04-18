@@ -27,8 +27,16 @@ _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on
 
 ```sh
 cd jellyfin-web
+npm ci
+```
+<details>
+    <summary><i>For pre-10.7</i></summary>
+
+```sh
+cd jellyfin-web
 yarn install
 ```
+</details>
 
 > You should get `jellyfin-web/dist/` directory.
 
