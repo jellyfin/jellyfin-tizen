@@ -31,8 +31,16 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ```sh
 cd jellyfin-web
+npm ci --no-audit
+```
+<details>
+    <summary><i>For pre-10.7</i></summary>
+
+```sh
+cd jellyfin-web
 yarn install
 ```
+</details>
 
 > You should get `jellyfin-web/dist/` directory.
 
