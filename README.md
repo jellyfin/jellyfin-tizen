@@ -34,7 +34,7 @@ cd jellyfin-web
 npm ci --no-audit
 ```
 <details>
-    <summary><i>For pre-10.7</i></summary>
+    <summary><i>For 10.7 and lower</i></summary>
 
 ```sh
 cd jellyfin-web
