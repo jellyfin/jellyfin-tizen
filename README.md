@@ -38,7 +38,7 @@ npm ci --no-audit
 
 ```sh
 cd jellyfin-web
-yarn install
+yarn install --frozen-lockfile
 ```
 </details>
 
