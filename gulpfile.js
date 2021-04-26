@@ -46,18 +46,28 @@ function modifyIndex() {
             meta.setAttribute('content', 'default-src * \'self\' \'unsafe-inline\' \'unsafe-eval\' data: gap: file: filesystem: ws: wss:;');
             this.head.appendChild(meta);
 
-            // Search for injected apploader
-            let apploader = this.body.querySelector('script[src*="apploader"]');
+            // Search for injected main.bundle
+            let apploader = this.head.querySelector('script[src^=main]');
 
-            if (!apploader) {
-                // inject apploader.js
-                apploader = this.createElement('script');
-                apploader.setAttribute('src', 'scripts/apploader.js');
+            if (apploader) {
+                console.debug('Found injected main.bundle');
                 apploader.setAttribute('defer', '');
-                this.body.appendChild(apploader);
             } else {
-                console.debug('Found injected apploader');
-                apploader.setAttribute('defer', '');
+                // Search for injected apploader
+                apploader = this.body.querySelector('script[src*="apploader"]');
+
+                if (apploader) {
+                    console.debug('Found injected apploader');
+                    apploader.setAttribute('defer', '');
+                } else {
+                    console.debug('Inject apploader');
+
+                    // inject apploader.js
+                    apploader = this.createElement('script');
+                    apploader.setAttribute('src', 'scripts/apploader.js');
+                    apploader.setAttribute('defer', '');
+                    this.body.appendChild(apploader);
+                }
             }
 
             const injectTarget = apploader.parentNode;
