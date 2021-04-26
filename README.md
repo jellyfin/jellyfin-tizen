@@ -31,8 +31,16 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ```sh
 cd jellyfin-web
-yarn install
+npm ci --no-audit
 ```
+<details>
+    <summary><i>For 10.7 and lower</i></summary>
+
+```sh
+cd jellyfin-web
+yarn install --frozen-lockfile
+```
+</details>
 
 > You should get `jellyfin-web/dist/` directory.
 
