@@ -29,14 +29,14 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 
 ```bat
 cd jellyfin-web
-npm ci
+npm ci --no-audit
 ```
 <details>
-    <summary><i>For pre-10.7</i></summary>
+    <summary><i>For 10.7 and lower</i></summary>
 
 ```bat
 cd jellyfin-web
-yarn install
+yarn install --frozen-lockfile
 ```
 </details>
 
