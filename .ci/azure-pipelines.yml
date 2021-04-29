@@ -1,0 +1,127 @@
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+
+pr:
+  branches:
+    include:
+    - '*'
+
+jobs:
+  - job: build
+    displayName: Build
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - checkout: self
+        clean: true
+        submodules: true
+        persistCredentials: true
+
+      - task: CmdLine@2
+        displayName: Setup directories and variables
+        inputs:
+          script: |
+            echo "##vso[task.setvariable variable=TIZEN_HOME_DIR]$(Agent.TempDirectory)/tizen"
+            echo "##vso[task.setvariable variable=CERTIFICATE_DIR]$(Agent.TempDirectory)/certificates"
+          failOnStderr: false
+
+      - task: UseNode@1
+        displayName: Install Node
+        inputs:
+          version: '12.x'
+
+      - task: CmdLine@2
+        displayName: Install Jellyfin Tizen
+        inputs:
+          script: | 
+            yarn install
+            JELLYFIN_WEB_DIR=./node_modules/jellyfin-web/dist yarn build
+          failOnStderr: false
+
+      - task: CmdLine@2
+        displayName: Setup Tizen Studio
+        inputs:
+          script: | 
+            export TIZEN_CLI_INSTALLER_URL=http://download.tizen.org/sdk/Installer/tizen-studio_3.7/web-cli_Tizen_Studio_3.7_ubuntu-64.bin
+            export TIZEN_STUDIO=$TIZEN_HOME_DIR/tizen-studio
+            
+            mkdir -p $TIZEN_HOME_DIR
+            cd $TIZEN_HOME_DIR
+
+            export INSTALLER=$(Agent.TempDirectory)/$(basename "$TIZEN_CLI_INSTALLER_URL")
+            curl "$TIZEN_CLI_INSTALLER_URL" > "$INSTALLER"
+            chmod 755 "$INSTALLER"
+            "$INSTALLER" --no-java-check --accept-license $TIZEN_STUDIO
+            rm "$INSTALLER"
+            cd $TIZEN_STUDIO/tools/certificate-generator/patches/partner
+            ./patch.sh $TIZEN_STUDIO
+            rm -rf $TIZEN_HOME_DIR/.package-manager $TIZEN_HOME_DIR/tizen-studio/license $TIZEN_HOME_DIR/tizen-studio/package-manager            
+          failOnStderr: false
+  
+      - task: CmdLine@2
+        displayName: Setup certificates
+        inputs:
+          script: |
+            export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
+            mkdir -p $CERTIFICATE_DIR
+            echo $(CERTIFICATE) | base64 --decode > $CERTIFICATE_DIR/certificate.p12
+            tizen security-profiles add -n DebugProfile -a $CERTIFICATE_DIR/certificate.p12 -p $(CERTIFICATE_PASSWORD)
+            tizen cli-config "profiles.path=$TIZEN_HOME_DIR/tizen-studio-data/profile/profiles.xml"
+
+      - task: CmdLine@2
+        displayName: Build Tizen web
+        inputs:
+          script: |
+            export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
+            tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "jellyfin-web/*" -e "package*.json" -e "yarn.lock"
+
+      - task: CmdLine@2
+        displayName: Package build
+        inputs:
+          script: |
+            export PATH=$TIZEN_HOME_DIR/tizen-studio/tools:$TIZEN_HOME_DIR/tizen-studio/tools/ide/bin:$PATH
+            tizen package -t wgt -s debug -- .buildResult
+
+      - task: CopyFiles@2
+        displayName: Staging artifacts
+        inputs:
+          SourceFolder: '.buildResult'
+          Contents: '*.wgt'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          OverWrite: true
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Release'
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)/Jellyfin.wgt'
+          artifactName: 'jellyfin-tizen-debug'
+  
+  - job: deploy
+    displayName: Deploy
+    dependsOn: build
+    condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: jellyfin-tizen-debug
+     
+      - task: GitHubRelease@1
+        displayName: Creating Github Release
+        inputs:
+          gitHubConnection: 'github.com_robinkruyt'
+          repositoryName: '$(Build.Repository.Name)'
+          action: 'create'
+          target: '$(Build.SourceVersion)'
+          tagSource: 'gitTag'
+          tagPattern: 'v[0-9]*\S*'
+          assets: 'jellyfin-tizen-debug/*.wgt'
+          addChangeLog: false
