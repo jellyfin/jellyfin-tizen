@@ -47,7 +47,7 @@ function modifyIndex() {
             this.head.appendChild(meta);
 
             // Search for injected main.bundle
-            let apploader = this.head.querySelector('script[src^=main]');
+            let apploader = this.querySelector('script[src^=main]');
 
             if (apploader) {
                 console.debug('Found injected main.bundle');
