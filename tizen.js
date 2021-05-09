@@ -3,6 +3,10 @@
 
     console.log('Tizen adapter');
 
+    window.addEventListener('popstate', function(e) {
+        console.debug('[popstate]', e.state);
+    });
+
     // Similar to jellyfin-web
     function generateDeviceId() {
         return btoa([navigator.userAgent, new Date().getTime()].join('|')).replace(/=/g, '1');
