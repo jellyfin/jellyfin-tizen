@@ -3,6 +3,7 @@ var gulpif = require('gulp-if');
 var del = require('del');
 var dom = require('gulp-dom');
 var path = require('path');
+var scan = require('gulp-scan');
 
 // Allow overriding of jellyfin-web directory
 var WEB_DIR = process.env.JELLYFIN_WEB_DIR || 'node_modules/jellyfin-web/dist';
@@ -13,7 +14,8 @@ var paths = {
     assets: {
         src: [
             WEB_DIR + '/**/*',
-            '!' + WEB_DIR + '/index.html'
+            '!' + WEB_DIR + '/index.html',
+            '!' + WEB_DIR + '/*.woff2'      // exclude Noto Sans fonts (not used)
         ],
         dest: 'www/'
     },
@@ -28,6 +30,18 @@ function clean() {
     return del([
         'www'
     ]);
+}
+
+// Search for used fonts and add them to assets
+function searchFonts() {
+    return gulp.src(WEB_DIR + '/main*.js')
+        .pipe(scan({
+            term: /[a-z0-9._-]*\.woff2/gi,
+            fn: function (match) {
+                console.log(`Found font ${match}`);
+                paths.assets.src.push(WEB_DIR + '/**/' + match);
+            }
+        }));
 }
 
 // Copy unmodified assets
@@ -91,6 +105,7 @@ function modifyIndex() {
 // Default build task
 var build = gulp.series(
     clean,
+    searchFonts,
     gulp.parallel(copy, modifyIndex)
 );
 
