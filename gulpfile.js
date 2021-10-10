@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var del = require('del');
@@ -34,12 +35,16 @@ function clean() {
 
 // Search for used fonts and add them to assets
 function searchFonts() {
+    const assets = paths.assets.src;
     return gulp.src(WEB_DIR + '/main*.js')
         .pipe(scan({
             term: /[a-z0-9._-]*\.woff2/gi,
             fn: function (match) {
-                console.log(`Found font ${match}`);
-                paths.assets.src.push(WEB_DIR + '/**/' + match);
+                const font = WEB_DIR + '/' + match;
+                if (!assets.includes(font) && fs.existsSync(font)) {
+                    console.debug(`Found font ${match}`);
+                    assets.push(font);
+                }
             }
         }));
 }
