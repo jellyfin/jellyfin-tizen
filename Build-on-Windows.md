@@ -3,8 +3,8 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 ### Prerequisites
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
-* Node.js
-* Yarn
+* Node.js 14+
+* Yarn (for jellyfin-web 10.7 and lower)
 * Samsung account
 
 > All tools (yarn, node, tizen) are assumed to be added to the `PATH` environment variable.
@@ -49,7 +49,7 @@ If any changes are made to `jellyfin-web/`, the `jellyfin-web/dist/` directory w
 ```bat
 cd jellyfin-tizen
 set JELLYFIN_WEB_DIR=C:\jellyfin\jellyfin-web\dist
-yarn install
+npm ci --no-audit
 ```
 <details>
     <summary><i>For Windows PowerShell</i></summary>
@@ -57,7 +57,7 @@ yarn install
 ```powershell
 cd jellyfin-tizen
 $env:JELLYFIN_WEB_DIR="C:\jellyfin\jellyfin-web\dist"
-yarn install
+npm ci --no-audit
 ```
 </details>
 
