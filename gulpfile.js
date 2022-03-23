@@ -91,6 +91,11 @@ function modifyIndex() {
 
             const injectTarget = apploader.parentNode;
 
+            // inject webapis.js
+            const webapis = this.createElement('script');
+            webapis.setAttribute('src', '$WEBAPIS/webapis/webapis.js');
+            injectTarget.insertBefore(webapis, apploader);
+
             // inject appMode script
             var appMode = this.createElement('script');
             appMode.text = 'window.appMode=\'cordova\';';

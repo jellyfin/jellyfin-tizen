@@ -45,6 +45,37 @@
         'subtitleburnsettings'
     ];
 
+    var systeminfo;
+
+    function getSystemInfo() {
+        if (systeminfo) {
+            return Promise.resolve(systeminfo);
+        }
+
+        return new Promise(function (resolve) {
+            tizen.systeminfo.getPropertyValue('DISPLAY', function (result) {
+                let devicePixelRatio = 1;
+
+                if (typeof webapis.productinfo.is8KPanelSupported === 'function' && webapis.productinfo.is8KPanelSupported()){
+                    console.log("8K UHD is supported");
+                    devicePixelRatio = 4;
+                } else if (typeof webapis.productinfo.isUdPanelSupported === 'function' && webapis.productinfo.isUdPanelSupported()){
+                    console.log("4K UHD is supported");
+                    devicePixelRatio = 2;
+                } else {
+                    console.log("UHD is not supported");
+                }
+
+                systeminfo = Object.assign({}, result, {
+                    resolutionWidth: Math.floor(result.resolutionWidth * devicePixelRatio),
+                    resolutionHeight: Math.floor(result.resolutionHeight * devicePixelRatio)
+                });
+
+                resolve(systeminfo)
+            });
+        });
+    }
+
     function postMessage() {
         console.log.apply(console, arguments);
     }
@@ -53,7 +84,9 @@
         AppHost: {
             init: function () {
                 postMessage('AppHost.init', AppInfo);
-                return Promise.resolve(AppInfo);
+                return getSystemInfo().then(function () {
+                    return Promise.resolve(AppInfo);
+                });
             },
 
             appName: function () {
@@ -94,6 +127,13 @@
             getSyncProfile: function (profileBuilder) {
                 postMessage('AppHost.getSyncProfile');
                 return profileBuilder({ enableMkvProgressive: false });
+            },
+
+            screen: function () {
+                return systeminfo ? {
+                    width: systeminfo.resolutionWidth,
+                    height: systeminfo.resolutionHeight
+                } : null;
             },
 
             supports: function (command) {
