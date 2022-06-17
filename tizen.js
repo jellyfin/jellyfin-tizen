@@ -54,7 +54,7 @@
 
         return new Promise(function (resolve) {
             tizen.systeminfo.getPropertyValue('DISPLAY', function (result) {
-                let devicePixelRatio = 1;
+                var devicePixelRatio = 1;
 
                 if (typeof webapis.productinfo.is8KPanelSupported === 'function' && webapis.productinfo.is8KPanelSupported()){
                     console.log("8K UHD is supported");
