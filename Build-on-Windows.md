@@ -29,8 +29,20 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 
 ```bat
 cd jellyfin-web
+set SKIP_PREPARE=1
 npm ci --no-audit
+npm run build:production
 ```
+<details>
+    <summary><i>For Windows PowerShell</i></summary>
+
+```powershell
+cd jellyfin-web
+$env:SKIP_PREPARE=1
+npm ci --no-audit
+npm run build:production
+```
+</details>
 <details>
     <summary><i>For 10.7 and lower</i></summary>
 
@@ -41,6 +53,10 @@ yarn install --frozen-lockfile
 </details>
 
 > You should get `jellyfin-web/dist/` directory.
+
+> `set SKIP_PREPARE=1` can be omitted for 10.9+.
+
+> Use `npm run build:development` if you want to debug the app.
 
 If any changes are made to `jellyfin-web/`, the `jellyfin-web/dist/` directory will need to be rebuilt using the command above.
 
