@@ -31,7 +31,8 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ```sh
 cd jellyfin-web
-npm ci --no-audit
+SKIP_PREPARE=1 npm ci --no-audit
+npm run build:production
 ```
 <details>
     <summary><i>For 10.7 and lower</i></summary>
@@ -43,6 +44,10 @@ yarn install --frozen-lockfile
 </details>
 
 > You should get `jellyfin-web/dist/` directory.
+
+> `SKIP_PREPARE=1` can be omitted for 10.9+.
+
+> Use `npm run build:development` if you want to debug the app.
 
 If any changes are made to `jellyfin-web/`, the `jellyfin-web/dist/` directory will need to be rebuilt using the command above.
 
