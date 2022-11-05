@@ -1,23 +1,20 @@
 _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on other distros if its requirements are met._
 
 ### Prerequisites
-* Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
+* Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
 * Node.js 16+
-* Samsung account
 
 ### Getting Started
 
 1. Install prerequisites.
-2. Install Certificate Manager and Samsung Certificate Extension with Tizen Studio Package Manager.
-3. Register on Samsung.
-4. Setup Samsung certificate <sup>_need Samsung account_</sup> in Certificate Manager.
-> You can also setup Tizen certificate to simplify deployment to emulator.
-5. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
+2. Install Certificate Manager using Tizen Studio Package Manager.
+3. Setup Tizen certificate in Certificate Manager.
+4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
    ```sh
    git clone https://github.com/jellyfin/jellyfin-web.git
    ```
-6. Clone or download Jellyfin Tizen (this) repository.
+5. Clone or download Jellyfin Tizen (this) repository.
    ```sh
    git clone https://github.com/jellyfin/jellyfin-tizen.git
    ```
