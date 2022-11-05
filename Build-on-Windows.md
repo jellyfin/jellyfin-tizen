@@ -3,7 +3,7 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 ### Prerequisites
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
-* Node.js 14+
+* Node.js 16+
 * Samsung account
 
 > All tools (node, tizen) are assumed to be added to the `PATH` environment variable.
