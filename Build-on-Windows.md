@@ -4,10 +4,9 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
 * Node.js 14+
-* Yarn (for jellyfin-web 10.7 and lower)
 * Samsung account
 
-> All tools (yarn, node, tizen) are assumed to be added to the `PATH` environment variable.
+> All tools (node, tizen) are assumed to be added to the `PATH` environment variable.
 
 ### Getting Started
 
@@ -41,14 +40,6 @@ cd jellyfin-web
 $env:SKIP_PREPARE=1
 npm ci --no-audit
 npm run build:production
-```
-</details>
-<details>
-    <summary><i>For 10.7 and lower</i></summary>
-
-```bat
-cd jellyfin-web
-yarn install --frozen-lockfile
 ```
 </details>
 

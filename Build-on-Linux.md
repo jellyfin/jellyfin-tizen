@@ -4,7 +4,6 @@ _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
 * Node.js 14+
-* Yarn (for jellyfin-web 10.7 and lower)
 * Samsung account
 
 ### Getting Started
@@ -30,14 +29,6 @@ cd jellyfin-web
 SKIP_PREPARE=1 npm ci --no-audit
 npm run build:production
 ```
-<details>
-    <summary><i>For 10.7 and lower</i></summary>
-
-```sh
-cd jellyfin-web
-yarn install --frozen-lockfile
-```
-</details>
 
 > You should get `jellyfin-web/dist/` directory.
 
