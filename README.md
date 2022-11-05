@@ -7,7 +7,7 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ### Prerequisites
 * Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
-* Node.js 14+
+* Node.js 16+
 * Samsung account
 
 ### Getting Started
