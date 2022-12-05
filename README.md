@@ -5,24 +5,20 @@
 _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ### Prerequisites
-* Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
+* Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
-* Node.js 14+
-* Yarn (for jellyfin-web 10.7 and lower)
-* Samsung account
+* Node.js 16+
 
 ### Getting Started
 
 1. Install prerequisites.
-2. Install Certificate Manager and Samsung Certificate Extension with Tizen Studio Package Manager.
-3. Register on Samsung.
-4. Setup Samsung certificate <sup>_need Samsung account_</sup> in Certificate Manager.
-> You can also setup Tizen certificate to simplify deployment to emulator.
-5. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
+2. Install Certificate Manager using Tizen Studio Package Manager.
+3. Setup Tizen certificate in Certificate Manager.
+4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
    ```sh
    git clone https://github.com/jellyfin/jellyfin-web.git
    ```
-6. Clone or download Jellyfin Tizen (this) repository.
+5. Clone or download Jellyfin Tizen (this) repository.
    ```sh
    git clone https://github.com/jellyfin/jellyfin-tizen.git
    ```
@@ -34,14 +30,6 @@ cd jellyfin-web
 SKIP_PREPARE=1 npm ci --no-audit
 npm run build:production
 ```
-<details>
-    <summary><i>For 10.7 and lower</i></summary>
-
-```sh
-cd jellyfin-web
-yarn install --frozen-lockfile
-```
-</details>
 
 > You should get `jellyfin-web/dist/` directory.
 
@@ -94,7 +82,7 @@ tizen package -t wgt -o . -- .buildResult
    ```sh
    sdb connect YOUR_TV_IP
    ```
-4. `Permit to install applications` on your TV with Device Manager from Tizen Studio. Or with sdb.
+4. If you are using a Samsung certificate, `Permit to install applications` on your TV using Device Manager from Tizen Studio. Or with sdb.
    > TODO: Find a command
 5. Install package.
    ```sh
