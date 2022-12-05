@@ -1,26 +1,22 @@
 _Commands in this guide are for Windows Command Prompt or Batch files. Most of them will work in Windows PowerShell. Special cases will be in collapsible command blocks._
 
 ### Prerequisites
-* Tizen Studio with IDE or Tizen Studio with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
+* Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
 * Git
-* Node.js 14+
-* Yarn (for jellyfin-web 10.7 and lower)
-* Samsung account
+* Node.js 16+
 
-> All tools (yarn, node, tizen) are assumed to be added to the `PATH` environment variable.
+> All tools (node, tizen) are assumed to be added to the `PATH` environment variable.
 
 ### Getting Started
 
 1. Install prerequisites.
-2. Install Certificate Manager and Samsung Certificate Extension with Tizen Studio Package Manager.
-3. Register on Samsung.
-4. Setup Samsung certificate <sup>_need Samsung account_</sup> in Certificate Manager.
-> You can also setup Tizen certificate to simplify deployment to emulator.
-5. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
+2. Install Certificate Manager using Tizen Studio Package Manager.
+3. Setup Tizen certificate in Certificate Manager.
+4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
    ```bat
    git clone https://github.com/jellyfin/jellyfin-web.git
    ```
-6. Clone or download Jellyfin Tizen (this) repository.
+5. Clone or download Jellyfin Tizen (this) repository.
    ```bat
    git clone https://github.com/jellyfin/jellyfin-tizen.git
    ```
@@ -41,14 +37,6 @@ cd jellyfin-web
 $env:SKIP_PREPARE=1
 npm ci --no-audit
 npm run build:production
-```
-</details>
-<details>
-    <summary><i>For 10.7 and lower</i></summary>
-
-```bat
-cd jellyfin-web
-yarn install --frozen-lockfile
 ```
 </details>
 
