@@ -22,7 +22,9 @@
    sdb connect YOUR_TV_IP
    ```
 4. If you are using a Samsung certificate, `Permit to install applications` on your TV using Device Manager from Tizen Studio. Or with sdb.
-   > TODO: Find a command
+   ```sh
+   sdb push ~/SamsungCertificate/<PROFILE_NAME>/*.xml /home/developer
+   ```
 5. Install package.
    ```sh
    tizen install -n Jellyfin.wgt -t UE65NU7400
