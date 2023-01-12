@@ -57,7 +57,7 @@ If any changes are made to `jellyfin-web/dist/`, the `jellyfin-tizen/www/` direc
 > Make sure you select the appropriate Certificate Profile in Tizen Certificate Manager. This determines which devices you can install the widget on.
 
 ```sh
-tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+tizen build-web -e ".git*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
 tizen package -t wgt -o . -- .buildResult
 ```
 
