@@ -13,6 +13,6 @@
     <tizen:profile name="tv"/>
     <tizen:setting screen-orientation="auto-rotation" context-menu="enable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
     <tizen:launch_screen ready_when="first-paint">
-        <tizen:ls_default background_image="logo_bg.png" background_color="#000b25" image="logo_fg.png" image_border="0px stretch"/>
+        <tizen:ls_default background_color="#000b25" image="splash_fg.png" image_border="0px stretch"/>
     </tizen:launch_screen>
 </widget>
