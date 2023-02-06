@@ -15,9 +15,15 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 2. Install Certificate Manager using Tizen Studio Package Manager.
 3. Setup Tizen certificate in Certificate Manager.
 4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
+
+   > It is recommended that the web version match the server version.
+
    ```sh
-   git clone https://github.com/jellyfin/jellyfin-web.git
+   git clone -b release-10.8.z https://github.com/jellyfin/jellyfin-web.git
    ```
+   > Replace `release-10.8.z` with the name of the branch you want to build.
+
+   > You can also use `git checkout` to switch branches.
 5. Clone or download Jellyfin Tizen (this) repository.
    ```sh
    git clone https://github.com/jellyfin/jellyfin-tizen.git
