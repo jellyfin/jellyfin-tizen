@@ -188,4 +188,15 @@
         tizen.tvinputdevice.registerKey('MediaRewind');
         tizen.tvinputdevice.registerKey('MediaFastForward');
     });
+
+    function updateKeys() {
+        if (location.hash.indexOf('/queue') !== -1 || location.hash.indexOf('/video') !== -1) {
+            // Disable on-screen playback control, if available on the page
+            tizen.tvinputdevice.registerKey('MediaPlayPause');
+        } else {
+            tizen.tvinputdevice.unregisterKey('MediaPlayPause');
+        }
+    }
+
+    window.addEventListener('viewshow', updateKeys);
 })();
