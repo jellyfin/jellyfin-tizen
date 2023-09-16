@@ -36,7 +36,10 @@ function clean() {
 // Search for used fonts and add them to assets
 function searchFonts() {
     const assets = paths.assets.src;
-    return gulp.src(WEB_DIR + '/main*.js')
+    return gulp.src([
+            WEB_DIR + '/main*.js',
+            WEB_DIR + '/htmlVideoPlayer*.js'
+        ])
         .pipe(scan({
             term: /[a-z0-9._-]*\.woff2/gi,
             fn: function (match) {
