@@ -7,6 +7,7 @@
     "url": "git+https://github.com/jellyfin/jellyfin-tizen.git"
   },
   "scripts": {
+    "build": "gulp",
     "postinstall": "gulp"
   },
   "devDependencies": {
