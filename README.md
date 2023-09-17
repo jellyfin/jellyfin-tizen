@@ -40,12 +40,14 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ```sh
 cd jellyfin-web
 SKIP_PREPARE=1 npm ci --no-audit
-npm run build:production
+USE_SYSTEM_FONTS=1 npm run build:production
 ```
 
 > You should get `jellyfin-web/dist/` directory.
 
 > `SKIP_PREPARE=1` can be omitted for 10.9+.
+
+> `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
 
 > Use `npm run build:development` if you want to debug the app.
 
@@ -61,6 +63,9 @@ JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
 > You should get `jellyfin-tizen/www/` directory.
 
 > The `JELLYFIN_WEB_DIR` environment variable can be used to override the location of `jellyfin-web`.
+
+> Add `DISCARD_UNUSED_FONTS=1` environment variable to discard unused fonts and to reduce the size of the app. (Until Jellyfin Web 10.9)  
+> Don't use it with Jellyfin Web 10.9+. Instead, use `USE_SYSTEM_FONTS=1` environment variable when building Jellyfin Web.
 
 If any changes are made to `jellyfin-web/dist/`, the `jellyfin-tizen/www/` directory will need to be rebuilt using the command above.
 
