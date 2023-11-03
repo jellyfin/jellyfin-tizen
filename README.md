@@ -18,8 +18,8 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ### Getting Started
 
 1. Install prerequisites.
-2. Install Certificate Manager using Tizen Studio Package Manager.
-3. Setup Tizen certificate in Certificate Manager.
+2. Install Certificate Manager using Tizen Studio Package Manager. (<a href="https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html">https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html</a>)
+3. Setup Tizen certificate in Certificate Manager. (<a href="https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/creating-certificates.html">https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/creating-certificates.html</a>)
 4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
 
    > It is recommended that the web version match the server version.
@@ -100,7 +100,9 @@ tizen package -t wgt -o . -- .buildResult
    sdb connect YOUR_TV_IP
    ```
 4. If you are using a Samsung certificate, `Permit to install applications` on your TV using Device Manager from Tizen Studio. Or with sdb.
-   > TODO: Find a command
+   ```sh
+   sdb push ~/SamsungCertificate/<PROFILE_NAME>/*.xml /home/developer
+   ```
 5. Install package.
    ```sh
    tizen install -n Jellyfin.wgt -t UE65NU7400
