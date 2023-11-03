@@ -11,12 +11,13 @@ var WEB_DIR = process.env.JELLYFIN_WEB_DIR || 'node_modules/jellyfin-web/dist';
 WEB_DIR = path.resolve(WEB_DIR);
 console.info('Using jellyfin-web from', WEB_DIR);
 
+const DISCARD_UNUSED_FONTS = !!process.env.DISCARD_UNUSED_FONTS;
+
 var paths = {
     assets: {
         src: [
             WEB_DIR + '/**/*',
-            '!' + WEB_DIR + '/index.html',
-            '!' + WEB_DIR + '/*.woff2'      // exclude Noto Sans fonts (not used)
+            '!' + WEB_DIR + '/index.html'
         ],
         dest: 'www/'
     },
@@ -35,7 +36,12 @@ function clean() {
 
 // Search for used fonts and add them to assets
 function searchFonts() {
+    if (!DISCARD_UNUSED_FONTS) return Promise.resolve('skipped');
+
     const assets = paths.assets.src;
+
+    assets.push('!' + WEB_DIR + '/*.woff2');
+
     return gulp.src(WEB_DIR + '/main*.js')
         .pipe(scan({
             term: /[a-z0-9._-]*\.woff2/gi,
