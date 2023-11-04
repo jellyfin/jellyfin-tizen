@@ -2,3 +2,4 @@
 www
 .*
 node_modules
+!.github
