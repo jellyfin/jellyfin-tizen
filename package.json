@@ -2,6 +2,8 @@
   "name": "jellyfin-tizen",
   "version": "0.1.0",
   "description": "Jellyfin for Samsung Smart TV (Tizen)",
+  "author": "Jellyfin (https://jellyfin.org/)",
+  "license": "GPL-3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jellyfin/jellyfin-tizen.git"
