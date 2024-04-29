@@ -17,5 +17,6 @@
     "gulp-dom": "1.0.0",
     "gulp-if": "3.0.0",
     "gulp-scan": "0.1.4"
-  }
+  },
+  "type": "module"
 }
