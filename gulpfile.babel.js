@@ -1,19 +1,19 @@
-var fs = require('fs');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var del = require('del');
-var dom = require('gulp-dom');
-var path = require('path');
-var scan = require('gulp-scan');
+import fs from 'fs';
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import del from 'del';
+import dom from 'gulp-dom';
+import path from 'path';
+import scan from 'gulp-scan';
 
 // Allow overriding of jellyfin-web directory
-var WEB_DIR = process.env.JELLYFIN_WEB_DIR || 'node_modules/jellyfin-web/dist';
+let WEB_DIR = process.env.JELLYFIN_WEB_DIR || 'node_modules/jellyfin-web/dist';
 WEB_DIR = path.resolve(WEB_DIR);
 console.info('Using jellyfin-web from', WEB_DIR);
 
 const DISCARD_UNUSED_FONTS = !!process.env.DISCARD_UNUSED_FONTS;
 
-var paths = {
+const paths = {
     assets: {
         src: [
             WEB_DIR + '/**/*',
@@ -66,7 +66,7 @@ function modifyIndex() {
     return gulp.src(paths.index.src)
         .pipe(dom(function() {
             // inject CSP meta tag
-            var meta = this.createElement('meta');
+            const meta = this.createElement('meta');
             meta.setAttribute('http-equiv', 'Content-Security-Policy');
             meta.setAttribute('content', 'default-src * \'self\' \'unsafe-inline\' \'unsafe-eval\' data: gap: file: filesystem: ws: wss:;');
             this.head.appendChild(meta);
@@ -103,12 +103,12 @@ function modifyIndex() {
             injectTarget.insertBefore(webapis, apploader);
 
             // inject appMode script
-            var appMode = this.createElement('script');
+            const appMode = this.createElement('script');
             appMode.text = 'window.appMode=\'cordova\';';
             injectTarget.insertBefore(appMode, apploader);
 
             // inject tizen.js
-            var tizen = this.createElement('script');
+            const tizen = this.createElement('script');
             tizen.setAttribute('src', '../tizen.js');
             tizen.setAttribute('defer', '');
             injectTarget.insertBefore(tizen, apploader);
@@ -119,15 +119,17 @@ function modifyIndex() {
 }
 
 // Default build task
-var build = gulp.series(
+const build = gulp.series(
     clean,
     searchFonts,
     gulp.parallel(copy, modifyIndex)
 );
 
 // Export tasks so they can be run individually
-exports.clean = clean;
-exports.copy = copy;
-exports.modifyIndex = modifyIndex;
+export {
+    clean,
+    copy,
+    modifyIndex
+};
 // Export default task
-exports.default = build;
+export default build;
