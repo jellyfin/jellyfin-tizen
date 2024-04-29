@@ -57,7 +57,7 @@ function searchFonts() {
 
 // Copy unmodified assets
 function copy() {
-    return gulp.src(paths.assets.src)
+    return gulp.src(paths.assets.src, { encoding: false })
         .pipe(gulp.dest(paths.assets.dest));
 }
 
