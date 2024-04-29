@@ -1,7 +1,7 @@
 import fs from 'fs';
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
-import del from 'del';
+import { deleteAsync as del } from 'del';
 import dom from 'gulp-dom';
 import path from 'path';
 import scan from 'gulp-scan';
