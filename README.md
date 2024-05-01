@@ -13,7 +13,7 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ### Prerequisites
 * Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI. See [Installing TV SDK](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html).
 * Git
-* Node.js 16+
+* Node.js 20+
 
 ### Getting Started
 
