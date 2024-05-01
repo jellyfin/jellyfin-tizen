@@ -3,7 +3,7 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 ### Prerequisites
 * Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI. See [Installing TV SDK](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html).
 * Git
-* Node.js 16+
+* Node.js 20+
 
 > All tools (node, tizen) are assumed to be added to the `PATH` environment variable.
 

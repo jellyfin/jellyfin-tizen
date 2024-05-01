@@ -3,7 +3,7 @@ _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on
 ### Prerequisites
 * Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI. See [Installing TV SDK](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html).
 * Git
-* Node.js 16+
+* Node.js 20+
 
 ### Getting Started
 
