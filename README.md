@@ -100,7 +100,15 @@ tizen package -t wgt -o . -- .buildResult
    ```sh
    sdb connect YOUR_TV_IP
    ```
-4. If you are using a Samsung certificate, `Permit to install applications` on your TV using Device Manager from Tizen Studio. Or with sdb.
+4. If you are using a Samsung certificate, `Permit to install applications` on your TV using Device Manager from Tizen Studio.
+
+   Or using Tizen CLI:
+   ```sh
+   tizen install-permit -t UE65NU7400
+   ```
+   > Specify target with `-t` option. Use `sdb devices` to list them.
+
+   Or using sdb:
    ```sh
    sdb push ~/SamsungCertificate/<PROFILE_NAME>/*.xml /home/developer
    ```
