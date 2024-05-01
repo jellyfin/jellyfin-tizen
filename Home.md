@@ -16,7 +16,7 @@
 ### Deploy to TV
 
 1. Run TV.
-2. Activate Developer Mode on TV (<a href="https://developer.samsung.com/tv/develop/getting-started/using-sdk/tv-device">https://developer.samsung.com/tv/develop/getting-started/using-sdk/tv-device</a>).
+2. Activate Developer Mode on TV. See [Enable Developer Mode on the TV](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html#Connecting-the-TV-and-SDK).
 3. Connect to TV with Device Manager from Tizen Studio.
 
    Or using sdb:
