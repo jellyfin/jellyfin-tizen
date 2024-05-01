@@ -18,8 +18,8 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ### Getting Started
 
 1. Install prerequisites.
-2. Install Certificate Manager using Tizen Studio Package Manager. (<a href="https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html">https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html</a>)
-3. Setup Tizen certificate in Certificate Manager. (<a href="https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/creating-certificates.html">https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/creating-certificates.html</a>)
+2. Install Certificate Manager using Tizen Studio Package Manager. See [Installing Required Extensions](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html#Installing-Required-Extensions).
+3. Setup Tizen certificate in Certificate Manager. See [Creating Certificates](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/creating-certificates.html).
    > If you have installation problems with the Tizen certificate, try creating a Samsung certificate. In this case, you will also need a Samsung account.
 4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
 
