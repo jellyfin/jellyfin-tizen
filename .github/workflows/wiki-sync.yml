@@ -1,0 +1,28 @@
+name: Sync Wiki
+
+on:
+  push:
+    branches:
+      - wiki/master
+  workflow_dispatch:
+
+jobs:
+  wiki-sync:
+    name: Sync Wiki
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+      with:
+        ref: wiki/master
+        fetch-depth: 100
+ 
+    - name: Add Wiki remote
+      run: |
+        git remote add wikirepo ${{ github.server_url }}/${{ github.repository }}.wiki.git
+        git fetch --depth=100 wikirepo
+
+    - name: Push Wiki branch to Wiki repo
+      run: |
+        git push wikirepo wiki/master:master
