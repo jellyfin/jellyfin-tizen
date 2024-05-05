@@ -4,5 +4,9 @@
     "github>jellyfin/.github//renovate-presets/nodejs",
     ":semanticCommitsDisabled",
     ":dependencyDashboard"
+  ],
+  "baseBranches": [
+    "$default",
+    "wiki/master"
   ]
 }
