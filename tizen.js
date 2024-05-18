@@ -3,6 +3,20 @@
 
     console.log('Tizen adapter');
 
+    if (window.Headers) {
+        try {
+            new window.Headers(undefined);
+        } catch (_) {
+            console.debug('patch \'Headers\' to accept \'undefined\'');
+
+            var _Headers = window.Headers;
+
+            window.Headers = function (init) {
+                return init ? new _Headers(init) : new _Headers();
+            }
+        }
+    }
+
     // Similar to jellyfin-web
     function generateDeviceId() {
         return btoa([navigator.userAgent, new Date().getTime()].join('|')).replace(/=/g, '1');
