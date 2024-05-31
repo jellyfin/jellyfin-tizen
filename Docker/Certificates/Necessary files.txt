@@ -1,0 +1,11 @@
+These files are needed from your generated *Samsung* certificates. NOT Tizen certificates.
+Please make sure that file names are exact. Capitalisation matters.
+
+- author.crt
+- author.p12
+- distributor.crt
+- distributor.p12
+
+I couldn't find a way to generate a Samsung certificates from CLI. So you need to generate it with a Tizen Studio GUI first.
+
+Don't forget these do expire and when they expire, you first need to delete your old Jellyfin build from your TV to be able to install the new build signed with the new certificates.
