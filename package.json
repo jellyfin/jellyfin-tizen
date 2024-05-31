@@ -11,7 +11,7 @@
     "postinstall": "gulp"
   },
   "devDependencies": {
-    "@babel/register": "7.23.7",
+    "@babel/register": "7.24.6",
     "del": "7.1.0",
     "gulp": "5.0.0",
     "gulp-dom": "1.0.0",
