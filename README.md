@@ -48,6 +48,8 @@ docker run --rm \
 -e CertPass=YOUR_CERTs_PASSWORD \
 -e TVIpAddress=YOUR_TVs_IP_ADDRESS \
 -e ACCEPT_TIZEN_STUDIO_LICENSE=0 \
+-e JELLYFIN_WEB_BRANCH=release-10.9.z \
+-e JELLYFIN_TIZEN_BRANCH=master \
 -it jellyfin-tizen-builder:latest
 
 ```
@@ -55,6 +57,8 @@ docker run --rm \
 > Don't forget to change the environment variables. (lines starting with -e)
 
 > To accept the license, set the variable to 1.
+
+> If you set the JELLYFIN\_\*\_BRANCH variables to \_SKIP\_, it will not try to pull files from GitHub repositories, enabling you to use your own custom versions.
 
 If you see `Tizen application is successfully installed.` at the logs, congratulations! You now have your Jellyfin client installed on your TV. Go to `Apps > Settings > Jellyfin > Add to Home Screen` to have it appear on your home screen. Have fun!
 

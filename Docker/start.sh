@@ -26,13 +26,27 @@ fi
 
 export PATH="${PATH}:/home/builder/tizen-studio/tools:/home/builder/tizen-studio/tools/ide/bin"
 
-cd /home/builder/jellyfin-web
-echo "Pulling jellyfin-web!"
-git pull
+if [ $JELLYFIN_WEB_BRANCH == "_SKIP_" ]
+then
+    echo "[jellyfin-tizen-builder] Skipping 'Pulling jellyfin-web!' step as JELLYFIN_WEB_BRANCH is set to $JELLYFIN_WEB_BRANCH."
+else
+    cd /home/builder/jellyfin-web
+    echo "Pulling jellyfin-web:$JELLYFIN_WEB_BRANCH!"
+    git fetch
+    git checkout -b $JELLYFIN_WEB_BRANCH origin/$JELLYFIN_WEB_BRANCH
+    git pull
+fi
 
-cd /home/builder/jellyfin-tizen
-echo "[jellyfin-tizen-builder] Pulling jellyfin-tizen!"
-git pull
+if [ $JELLYFIN_TIZEN_BRANCH == "_SKIP_" ]
+then
+    echo "[jellyfin-tizen-builder] Skipping 'Pulling jellyfin-tizen!' step as JELLYFIN_TIZEN_BRANCH is set to $JELLYFIN_TIZEN_BRANCH."
+else
+    cd /home/builder/jellyfin-tizen
+    echo "Pulling jellyfin-tizen:$JELLYFIN_TIZEN_BRANCH!"
+    git fetch
+    git checkout -b $JELLYFIN_TIZEN_BRANCH origin/$JELLYFIN_TIZEN_BRANCH
+    git pull
+fi
 
 cd /home/builder/jellyfin-web
 echo "[jellyfin-tizen-builder] Installing jellyfin-web dependencies!"
