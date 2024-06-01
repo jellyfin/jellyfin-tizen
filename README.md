@@ -58,6 +58,12 @@ docker run --rm \
 
 If you see `Tizen application is successfully installed.` at the logs, congratulations! You now have your Jellyfin client installed on your TV. Go to `Apps > Settings > Jellyfin > Add to Home Screen` to have it appear on your home screen. Have fun!
 
+## Notes
+
+- Red-colored output starting with `[BABEL] Note: The code gener...` is NOT an error. It's just a warning and it's expected that this part of the build will take a long time.
+- If your certificates expire and you rebuild your Jellyfin widget, you will not be able to update your instance deployed on your TV directly. First, you will need to uninstall the build signed with your old certificates and then install the new build.
+- This container doesn't have much error-handling as Tizen Studio is not very helpful on that topic. When the container exits without any obvious errors, it doesn't mean everything went perfectly. Don't forget to have a quick look at the logs, especially search for the `Tizen application is successfully installed.` log.
+
 ## Build Manually
 
 _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
