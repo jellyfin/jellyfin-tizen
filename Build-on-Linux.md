@@ -16,9 +16,9 @@ _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on
    > It is recommended that the web version match the server version.
 
    ```sh
-   git clone -b release-10.8.z https://github.com/jellyfin/jellyfin-web.git
+   git clone -b release-10.9.z https://github.com/jellyfin/jellyfin-web.git
    ```
-   > Replace `release-10.8.z` with the name of the branch you want to build.
+   > Replace `release-10.9.z` with the name of the branch you want to build.
 
    > You can also use `git checkout` to switch branches.
 5. Clone or download Jellyfin Tizen (this) repository.
