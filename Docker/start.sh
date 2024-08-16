@@ -4,7 +4,6 @@ then
     cd /home/builder
     echo "[jellyfin-tizen-builder] Installing Tizen Studio 5.5!"
     su builder -c "./web-cli_Tizen_Studio_5.5_ubuntu-64.bin --accept-license /home/builder/tizen-studio"
-    mkdir /home/builder/tizen-studio-data/
     mkdir /home/builder/tizen-studio-data/profile/
     touch /home/builder/tizen-studio-data/profile/profiles.xml
     cd /home/builder/tizen-studio-data/profile/
