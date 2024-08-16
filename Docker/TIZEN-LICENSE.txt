@@ -1,0 +1,213 @@
+TIZEN STUDIO LICENSE AGREEMENT
+
+BEFORE YOU ("YOU" OR ???LICENSEE???) USE THE TIZEN STUDIO, PLEASE READ ALL OF TH
+E TERMS AND CONDITIONS SET OUT IN THIS TIZEN STUDIO LICENSE AGREEMENT ("AGREEMEN
+T") CAREFULLY. YOUR USE OF THE TIZEN STUDIO IS SUBJECT TO THE TERMS AND CONDITIO
+NS SET FORTH IN THIS AGREEMENT. BY CLICKING THE "ACCEPT" BUTTON OR BY USING ANY 
+PART OF THE TIZEN STUDIO, YOU AGREE (ON BEHALF OF YOURSELF AND/OR YOUR COMPANY) 
+TO THE TERMS AND CONDITIONS OF THIS AGREEMENT, WHICH THEN COMMENCES WITH EFFECT 
+AS A LEGAL AGREEMENT BETWEEN YOU AND SAMSUNG. IF YOU DO NOT OR CANNOT AGREE TO T
+HE TERMS AND CONDITIONS OF THIS AGREEMENT, YOU MUST NOT DOWNLOAD OR USE THE TIZE
+N STUDIO. 
+IMPORTANT NOTE: This license is primarily applicable to several proprietary comp
+onents, which are not open sourced. If applicable, the Open Source Software lice
+nse shall take precedence over the rights and restrictions granted in this Agree
+ment, but solely with respect to such Open Source Software. 
+1. Definitions. 
+1.1 ???Affiliate??? means an entity that, directly or indirectly, controls, is c
+ontrolled by, or is under common control with a party to this Agreement, but onl
+y for so long as such control exists, and where ???control??? shall mean ownersh
+ip of more than 50% of the stock or other equity interests entitled to vote for 
+the election of directors or an equivalent governing body. 
+1.2 ???Open Source Software??? includes, without limitation, a software license 
+that requires as a condition of use, modification, and/or distribution of such s
+oftware that such software or other software incorporated into, derived from or 
+distributed with such software be (a) disclosed or distributed in source code fo
+rm; (b) be licensed for the purpose of making derivative works; or (c) be redist
+ributable at no charge. 
+1.3 ???Tizen SDK TIZEN STUDIO??? includes the documentation, software, both sour
+ce code and object code, sample applications, emulator, tools, libraries, APIs, 
+data, and materials provided by Samsung to You for use in connection with Your a
+pplication development, and includes any updates that may be provided by Samsung
+. 
+1.4 ???Tizen Certified Platform??? shall mean a software platform that complies 
+with the standards set forth in the Tizen Compliance Specification and passes th
+e Tizen Compliance Tests as defined from time to time by the Tizen Technical Ste
+ering Group and certified by the Tizen Association or its designated agent. 
+1.5 ???Tizen Applications??? means all applications that are developed by using 
+the TIZEN STUDIO with or without extensions and can run only on the Tizen Certif
+ied Platform. 
+1.6 "You" (or "Your") shall mean an individual or Legal Entity exercising permis
+sions granted by this License. 
+2. License Grant. 
+2.1 Subject to the terms and conditions of this Agreement, Samsung hereby grants
+ to You a royalty-free, non-exclusive, non-transferable and worldwide license to
+ use for the sole purpose of the development of Tizen Applications. 
+3. Restrictions. 
+3.1 Except for the limited license granted to You herein, You agree that all rig
+ht, title and interest in and to the TIZEN STUDIO including the concepts and tec
+hnology inherent in them, Samsung or Tizen trademarks, copyrights, patents, trad
+e secrets and other intellectual property rights, are, and at all times shall re
+main, the sole and exclusive property of Samsung. Except to the extent permitted
+ under this Agreement or by applicable law, You shall not (i) modify, reverse en
+gineer or disassemble any portion of the TIZEN STUDIO; (ii) lease, rent, copy, r
+edistribute or sublicense the TIZEN STUDIO to third party; or (iii) remove, effa
+ce or obscure any copyright notices, logos or other proprietary notices or legen
+ds included in the TIZEN STUDIO. You may not use any component part of the TIZEN
+ STUDIO in any way independent from the TIZEN STUDIO. You may not load or instal
+l any of the TIZEN STUDIO onto mobile phones or any other devices, except a pers
+onal computer. 
+3.2 Samsung may extend, enhance, or otherwise modify the TIZEN STUDIO at any tim
+e without notice. If updates are made available by Samsung, the terms of this Ag
+reement will govern such updates, unless the update is accompanied by a separate
+ license, in which case the terms of that license will govern. Samsung is not ob
+ligated to provide any maintenance, technical or other support for the TIZEN STU
+DIO. You acknowledge that Samsung has no express or implied obligation to announ
+ce or make available any updates to the TIZEN STUDIO. 
+4. Use of the TIZEN STUDIO. 
+4.1 Your Applications must not (i) breach any applicable laws, regulations or ge
+nerally accepted practices or guidelines in the applicable jurisdictions; (ii) c
+ontain any material, component or code which could damage, destroy, unduly burde
+n or unreasonably affect software, firmware, hardware, data, systems, services, 
+or networks; or (iii) disable, hack or otherwise interfere with any authenticati
+on, content protection, digital signing, digital rights management, security or 
+verification mechanisms implemented in or by the Tizen Certified platform. 
+4.2 Your Applications must not breach any applicable laws, regulations or genera
+lly accepted practices or guidelines in the applicable jurisdictions or disable,
+ unduly burden or unreasonably interfere with software, firmware, hardware, data
+, systems, services, or networks.
+4.3 Your Applications SHALL NOT BE USED FOR ANY MEDICAL PURPOSES, including, wit
+hout limitation, diagnosis of disease or other conditions; cure, mitigation, tre
+atment, or prevention of disease; detection, diagnosis, monitoring, management o
+r treatment of any medical condition, disease or vital physiological processes; 
+transmission of time-sensitive health information (collectively, ???Medical Purp
+oses???). Licensee shall not develop, make, promote, market, distribute, license
+, sell or use Application for any Medical Purposes. Licensee hereby represents a
+nd warrants that no Application is and will be classified as a medical device un
+der any applicable jurisdiction in the world, including, without limitation, U.S
+. Food and Drug Administration. Any breach of this Section 15 shall be deemed as
+ a material breach under this Agreement. Where Licensee allegedly or actually br
+eaches this Section 15, subject to Samsung???s interpretation, Samsung has a rig
+ht to revoke the license granted under this Agreement and/or block access to Pub
+lished APIs by Applications, at its sole discretion.
+4.4 You agree that You are solely liable for any breach of your obligations unde
+r this Agreement or any applicable laws or regulations, and for the consequences
+ of any such breach. 
+4.5 You agree that if You use the Tizen SDK to develop application, You will pro
+tect the privacy and legal rights of users. If users provide You with user names
+, passwords, or other login information or personal information, You must make t
+he users aware that the information will be available to Your application, and Y
+ou must provide legally adequate privacy notice and protection for those users. 
+If Your application stores personal or sensitive information provided by users, 
+it must do so securely.
+5. Open Source Software. 
+5.1 You hereby acknowledge that the TIZEN STUDIO may contain Open Source Softwar
+e. You agree to review any documentation that accompanies the TIZEN STUDIO in or
+der to determine which portions of the TIZEN STUDIO are Open Source Software and
+ are licensed under an Open Source Software license. To the extent any such lice
+nse requires that Samsung provides Developer the rights to copy, modify, distrib
+ute or otherwise use any Open Source Software that are inconsistent with the lim
+ited rights granted to You in this Agreement, then such rights in the applicable
+ Open Source Software license shall take precedence over the rights and restrict
+ions granted in this Agreement, but solely with respect to such Open Source Soft
+ware. 
+5.2 You acknowledge that the Open Source Software license is solely between You 
+and the applicable Open Source Software. You shall comply with the terms of all 
+applicable Open Source Software licenses, if any. 
+6. DISCLAIMER OF WARRANTY. 
+6.1 THE TIZEN STUDIO IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. SAMSUNG O
+R TIZEN PARTNERS DO NOT WARRANT THAT THE USE OF THE TIZEN STUDIO WILL NOT INFRIN
+GE ANY THIRD PARTY'S INTELLECTUAL PROPERTY RIGHTS. NEITHER SAMSUNG NOR TIZEN PAR
+TNERS WARRANT THAT THE TIZEN STUDIO IS ERROR FREE. SAMSUNG OR TIZEN PARTNERS MAK
+E NO WARRANTIES, EXPRESS OR IMPLIED, WITH RESPECT TO THE TIZEN STUDIO, INCLUDING
+ BUT NOT LIMITED TO ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR 
+PURPOSE OR AGAINST INFRINGEMENT, OR ANY EXPRESS OR IMPLIED WARRANTY ARISING OUT 
+OF TRADE USAGE OR OUT OF A COURSE OF DEALING OR COURSE OF PERFORMANCE. NO INFORM
+ATION OR ADVICE GIVEN BY SAMSUNG OR ITS AGENTS, EMPLOYEES, OR REPRESENTATIVES, W
+HETHER ORAL OR WRITTEN, SHALL CREATE ANY REPRESENTATION OR WARRANTY. 
+6.2 TO THE EXTENT PERMITTED BY LAW, IN NO EVENT SHALL SAMSUNG OR TIZEN PARTNERS 
+BE LIABLE FOR PERSONAL INJURY OR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENT
+IAL DAMAGES WHATSOEVER, OR FOR LOSS OF PROFITS, LOSS OF DATA, BUSINESS INTERRUPT
+ION, OR FOR ANY PECUNIARY DAMAGES OR LOSSES, ARISING OUT OF OR RELATED TO YOUR G
+RANT OF LICENSE HEREIN, OR INABILITY TO USE THE TIZEN STUDIO, THE PROVISION OF O
+R FAILURE TO PROVIDE SUPPORT OR OTHER SERVICES, INFORMATION, SOFTWARE, AND RELAT
+ED CONTENT THROUGH THE SOFTWARE OR OTHERWISE ARISING OUT OF THE USE OF THE TIZEN
+ STUDIO, OR OTHERWISE UNDER OR IN CONNECTION WITH ANY PROVISION OF THIS AGREEMEN
+T, HOWEVER CAUSED, REGARDLESS OF THE THEORY OF LIABILITY (CONTRACT, TORT OR OTHE
+RWISE) AND EVEN IF THE SAMSUNG BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. 
+7. Indemnification. 
+7.1 You agree to indemnify, defend and hold harmless Samsung, including their Af
+filiates, from any claims, damages, liabilities, losses, costs, suits or expendi
+tures incurred by Samsung, including their Affiliates as a result of any infring
+ement or alleged infringement of intellectual property rights of a third party c
+aused by Your development or exploitation of Applications. 
+8. Confidentiality. 
+8.1 You acknowledge and agree that the TIZEN STUDIO was developed at considerabl
+e time and expense by Samsung and contains valuable trade secrets and confidenti
+al information of Samsung. Accordingly, You agree to maintain the TIZEN STUDIO i
+n confidence and except as expressly provided in Section 2, You (i) will not dis
+close or provide access thereto to any person, or (ii) use the TIZEN STUDIO for 
+any purpose not expressly authorized hereby, or permit or authorize any other pe
+rson to do so. 
+8.2 The restriction herein shall not apply to the extent that such information i
+s in the public domain or hereafter falls into the public domain through no faul
+t of You. Any combination of trade secrets and information of Samsung that forms
+ part of the TIZEN STUDIO shall not be deemed to be public merely because indivi
+dual parts of the TIZEN STUDIO are in the public domain, unless the combination 
+itself is in the public domain. 
+9. Privacy and Information
+9.1 In order to improve the Tizen SDK, Samsung may collect certain information f
+rom the software including but not limited to voice commands, unique identifier,
+ associated IP address, and certain other relevant information such as contact n
+ames, song information in your music library and/or location information (if you
+r GPS is turned on).
+9.2 The data collected is maintained in accordance with Samsung Privacy Policy l
+ocated at https://account.samsung.com/membership/pp.
+10. Term and Termination. 
+10.1 Term. The term of this Agreement shall commence as of your acceptance of th
+e terms of this Agreement or your use of the TIZEN STUDIO and continue until ter
+minated by either You or Samsung. 
+10.2 Termination. You may terminate this Agreement simply by ceasing Your use of
+ the TIZEN STUDIO. Samsung may terminate this Agreement (i) at any time for any 
+or no reason upon 30 days prior written notice to you or (ii) immediately upon w
+ritten notice to You if You have materially breached this Agreement. 
+10.3 Effect of Termination. Upon termination of this Agreement: (a) all license 
+rights granted in this Agreement will terminate; (b) You shall promptly stop the
+ distribution of the TIZEN STUDIO and destroy all electronic copies of the TIZEN
+ STUDIO and/or return the TIZEN STUDIO to Samsung. The Sections entitled Restric
+tions, Use of the TIZEN STUDIO, Open Source Software, Disclaimer of Warranty, In
+demnification, Confidentiality, Term and Termination and General Legal Terms sha
+ll survive the expiration or termination of this Agreement for any reason. 
+11. General Legal Terms. 
+11.1 Export Compliance. You are responsible for applying for and obtaining all e
+xport and import licenses and/or authorizations related to the TIZEN STUDIO or A
+pplications, including without limitation all such licenses and authorizations r
+equired by any and all governmental bodies and/or regulatory agency. 
+11.2 Assignment. You may not assign the Agreement, in whole or in part, by opera
+tion of law or otherwise, without Samsung???s prior written consent, and any att
+empt to do so without such consent shall be void. 
+11.3 Governing Law; Venue. This Agreement shall be governed by and construed in 
+accordance with the laws of the State of New York, USA, without regard to any co
+nflict-of-laws rules. Any and all disputes in connection with or arising out of 
+this Agreement shall be finally settled by arbitration. The arbitration shall be
+ held in New York City, New York, USA in accordance with the Rules of Arbitratio
+n of the International Chamber of Commerce by one or more arbitrator(s) appointe
+d in accordance with the said rules. The arbitration award rendered by the arbit
+rator(s) shall be final and binding. 
+11.4 Amendments and No Waiver. This Agreement may be modified without notice. Th
+e failure by Samsung or You to insist upon strict performance of any of the prov
+isions contained in this Agreement shall in no way constitute a waiver of its ri
+ghts as set forth in this Agreement, at law or in equity, or a waiver of any oth
+er provisions or subsequent default by the other party in the performance or com
+pliance with any of the terms and conditions set forth in this Agreement. 
+11.5 Entire Agreement. This Agreement contains the entire agreement of You and S
+amsung with respect to its subject matter and supersedes all existing agreements
+ and all other oral, written or other communications between the You and Samsung
+ concerning this subject matter. If any of the provisions of the Agreement is de
+termined to be invalid, illegal or otherwise unenforceable, such provision shall
+ be deemed replaced by a provision which carries out the original intent and pur
+pose of such provision to the greatest extent lawful and the remaining provision
+s shall remain in full force and effect. 
+Last Updated July, 2016
+
+END OF TIZEN STUDIO LICENSE AGREEMENT
