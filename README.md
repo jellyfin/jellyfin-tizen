@@ -96,24 +96,29 @@ tizen package -t wgt -o . -- .buildResult
 
 1. Run TV.
 2. Activate Developer Mode on TV. See [Enable Developer Mode on the TV](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html#Connecting-the-TV-and-SDK).
-3. Connect to TV with Device Manager from Tizen Studio.
+3. Connect to TV with one of the following options:
+   * Device Manager from `Tools -> Device Manager` in Tizen Studio.
 
-   Or using sdb:
-   ```sh
-   sdb connect YOUR_TV_IP
-   ```
-4. If you are using a Samsung certificate, `Permit to install applications` on your TV using Device Manager from Tizen Studio.
+   * sdb:
+      ```sh
+      sdb connect YOUR_TV_IP
+      ```
+4. If you are using a Samsung certificate, allow installs onto your TV using your certificate with one of the following options:
+   > If you need to change or create a new Samsung certificate (see [Getting-Started](#getting-started) step 3), you will need to [re-build WGT](#build-wgt) once you have the Samsung certificate you'll use for the install.
 
-   Or using Tizen CLI:
-   ```sh
-   tizen install-permit -t UE65NU7400
-   ```
-   > Specify target with `-t` option. Use `sdb devices` to list them.
+   * Device Manager from `Tools -> Device Manager` in Tizen Studio:
+      * Right-click on the connected device, and select `Permit to install applications`.
 
-   Or using sdb:
-   ```sh
-   sdb push ~/SamsungCertificate/<PROFILE_NAME>/*.xml /home/developer
-   ```
+   * Tizen CLI:
+      ```sh
+      tizen install-permit -t UE65NU7400
+      ```
+      > Specify target with `-t` option. Use `sdb devices` to list them.
+
+   * sdb:
+      ```sh
+      sdb push ~/SamsungCertificate/<PROFILE_NAME>/*.xml /home/developer
+      ```
 5. Install package.
    ```sh
    tizen install -n Jellyfin.wgt -t UE65NU7400
