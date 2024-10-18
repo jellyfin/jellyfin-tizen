@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@babel/register": "7.25.7",
-    "del": "7.1.0",
+    "del": "8.0.0",
     "gulp": "5.0.0",
     "gulp-dom": "1.0.0",
     "gulp-if": "3.0.0",
