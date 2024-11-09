@@ -6,6 +6,7 @@ We need 4 images with this characteristics, more info [here](https://developer.s
 - 24 bit PNG (RGB)
 - names must be screenshot_appname0X.png (where X is the image number)
 
+## Image suggestion
 
 - [ ] Home page image
 - [ ] Movies page image
