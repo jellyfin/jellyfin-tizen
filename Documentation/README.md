@@ -20,7 +20,7 @@ Release
 - [ ] Entering Service Information (We can fill in our contact info)
 - [ ] Setting Service Country (We don't plan on any restrictions, all available countries will be allowed)
 - [ ] Entering Billing Information (N/A, we will choose "Free")
-- [ ] Entering Application Feature Information _(I believe HDR, and Player)
+- [ ] Entering Application Feature Information (I believe HDR, and Player)
 - [ ] [Entering Verification Information](https://developer.samsung.com/tv-seller-office/guides/applications/entering-application-information.html#Entering-Verification-Information)
 
 
