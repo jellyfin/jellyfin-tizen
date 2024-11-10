@@ -46,10 +46,3 @@ Age Rating Policy is easy to tackle. When we submit to app stores, we have a ded
 Launch Checklist looks easy enough. It's just making sure we have everything in place.
 
 Application UI Description is the most daunting. We have already documented most TV UI flow for LG, and we can take screenshots/etc for the Samsung template.
-
-# Application UI Description
-- [ ] UI Structure
-- [ ] Use Cases
-- [ ] Menus and Functions
-- [ ] Remote Control Keys
-- [X] Language Options
