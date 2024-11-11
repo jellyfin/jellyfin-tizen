@@ -2,12 +2,11 @@
 
 ## Colaborative workspace
 
-I have created a gogle slides here - https://docs.google.com/presentation/d/1zBI6k_Lts2L2pui6vuNwfvy1AmN91xIo4W_2iDjCpds/edit?usp=sharing
+I have created a google slides [HERE](https://docs.google.com/presentation/d/1zBI6k_Lts2L2pui6vuNwfvy1AmN91xIo4W_2iDjCpds/edit?usp=sharing).
 
-It has sections for flow, we can then export to png for upload o Samsung
+It has sections for flow, we can then export to png for upload to Samsung
 
-## Samsung requirement
-
+## Samsung requirements
 
 Use labeled screenshots to describe the UI elements on each application screen.
 
@@ -18,3 +17,7 @@ Label the UI elements with numbers or text. If there are many elements, use numb
 Describe the elements in a table.
 
 If the screenshots are not in English, provide translations for titles, headings, and button labels.
+
+<p align="center">
+<img alt="Usecase example" src="https://developer.samsung.com/media/3245/numberlabels_redesigned.png"/>
+</p>

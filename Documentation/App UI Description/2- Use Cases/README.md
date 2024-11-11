@@ -2,9 +2,11 @@
 
 ## Colaborative workspace
 
-I have created a gogle slides here - https://docs.google.com/presentation/d/1BVVMcW2MJzI41EFU_VNMalA7nsovTTTJuRCVK9ijqfk/edit?usp=sharing
+I have created a google slides [HERE](https://docs.google.com/presentation/d/1BVVMcW2MJzI41EFU_VNMalA7nsovTTTJuRCVK9ijqfk/edit?usp=sharing).
 
-It has sections for flow, we can then export to png for upload o Samsung
+Overall Steps:
+
+It has sections for flow, we can then export to png for upload to Samsung
 
 ## Samsung requirement
 
@@ -23,3 +25,7 @@ Example:
 - Select “Explore” and click “OK”. The application moves to the “Explore” page, which shows a category list.
 - Select a category and click “OK”.  The application moves to the category page, which lists the videos in that category.
 - You can select a video for playback from the video list, or click “Back” to return to the category list.
+
+<p align="center">
+<img alt="Usecase example" src="https://developer.samsung.com/media/3296/userlogin_slide.png"/>
+</p>
