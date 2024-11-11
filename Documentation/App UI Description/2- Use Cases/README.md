@@ -1,5 +1,13 @@
 # Use Cases
 
+## Colaborative workspace
+
+I have created a gogle slides here - https://docs.google.com/presentation/d/1BVVMcW2MJzI41EFU_VNMalA7nsovTTTJuRCVK9ijqfk/edit?usp=sharing
+
+It has sections for flow, we can then export to png for upload o Samsung
+
+## Samsung requirement
+
 Describe the application functionality in detail, by dividing it into clear use cases. The use cases must cover the main functions or scenarios of the application.
 
 You can use text, figures, and screenshots.
