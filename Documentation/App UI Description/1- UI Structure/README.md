@@ -1,5 +1,13 @@
 # UI Structure
 
+## Colaborative workspace
+
+I have created a google slides [HERE](https://docs.google.com/presentation/d/1RaFaoxFI94UVqH53_3I8fuviq9ktNy0hMoSBGLhgWUE/edit?usp=sharing).
+
+We can then export to png for upload to Samsung
+
+## Samsung requirements
+
 Illustrate the complete UI structure of your application.
 
 − All application screens and navigation paths must be included
