@@ -26,7 +26,7 @@ Example:
 - Select a category and click “OK”.  The application moves to the category page, which lists the videos in that category.
 - You can select a video for playback from the video list, or click “Back” to return to the category list.
 
-## Additional information
+## Additional requirements
  
 | Application Feature | Required Information(missing information causes application rejection) |
 | ------------------- | ---------------------------------------------------------------------- |
