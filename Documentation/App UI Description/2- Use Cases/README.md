@@ -26,6 +26,10 @@ Example:
 - Select a category and click “OK”.  The application moves to the category page, which lists the videos in that category.
 - You can select a video for playback from the video list, or click “Back” to return to the category list.
 
+<p align="center">
+<img alt="Usecase example" src="https://developer.samsung.com/media/3296/userlogin_slide.png"/>
+</p>
+
 ## Additional requirements
  
 | Application Feature | Required Information(missing information causes application rejection) |
@@ -39,9 +43,5 @@ Example:
 
 ## Changes needed
 
-[ ] Slide 1 - Add the demo server link or define how they can connect to the demo instance, they will not test it if they can´t connect to a server.
-[ ] Slide 5 - Change the Username and Password to connect to a Demo server =>  User "demo", password "".
-
-<p align="center">
-<img alt="Usecase example" src="https://developer.samsung.com/media/3296/userlogin_slide.png"/>
-</p>
+- [ ] Slide 1 - Add the demo server link or define how they can connect to the demo instance, they will not test it if they can´t connect to a server.
+- [ ] Slide 5 - Change the Username and Password to connect to a Demo server =>  User "demo", password "".
