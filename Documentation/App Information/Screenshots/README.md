@@ -11,10 +11,10 @@ Screenshots might need to be taken on a server with only child appropriate conte
 
 ## Image suggestion
 
-- [ ] [Home page image](./screenshot_jellyfin01.png)
+- [X] [Home page image](./screenshot_jellyfin01.png)
 - [X] [Movies page image](./screenshot_jellyfin02.png)
-- [ ] [Movies detail page image](./screenshot_jellyfin03.png)
+- [X] [Movies detail page image](./screenshot_jellyfin03.png)
 - [ ] TV shows page image
-- [ ] [Player image](./screenshot_jellyfin04.png)
-- [ ] Control panel?
-- [ ] [Actor page image](./screenshot_jellyfin05.png)
+- [X] [Player image](./screenshot_jellyfin04.png)
+- [X] Control panel?
+- [X] [Actor page image](./screenshot_jellyfin05.png)
