@@ -32,9 +32,9 @@ Example:
 
 ## Additional requirements
  
-| Application Feature | Required Information(missing information causes application rejection) |
-| ------------------- | ---------------------------------------------------------------------- |
-| User login | <ul><li>Test account with a valid user ID and password</li></ul> |
+| Application Feature | Required Information(missing information causes application rejection) | NOTES |
+| ------------------- | ---------------------------------------------------------------------- |------- |
+| User login | <ul><li>Test account with a valid user ID and password</li></ul> | [Demo link](https://demo.jellyfin.org/stable/web/#/login.html?serverid=713dc3fe952b438fa70ed35e4ef0525a&url=%2Fhome.html) user = demo - password is blank [Image Here](./Screenshots/Slide05.png)| 
 | Device activation | <ul><li>Test account that permits an unlimited number of activated devices</li><li>Instructions for activating the device at an external website, if needed</li></ul> |
 | In-app purchases | <ul><li>Valid credit card information for testing</li><li>Test account with funds available for making purchases</li><li>Valid coupon or promotional codes, if supported</li></ul> |
 | Gaming | <ul><li>Cheat codes or master account for accessing all game levels</li><li>List of correct responses to any trivia questions</li></ul> |
