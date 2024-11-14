@@ -2,9 +2,9 @@
 
 ## Checklist
 
-- [ ] UI Structure
-- [ ] Use Cases
-- [ ] Menus and Functions
+- [X] UI Structure
+- [X] Use Cases
+- [X] Menus and Functions
 - [X] Remote Control Keys
 - [X] Language Options
 
