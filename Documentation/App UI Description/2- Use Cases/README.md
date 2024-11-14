@@ -40,8 +40,3 @@ Example:
 | Gaming | <ul><li>Cheat codes or master account for accessing all game levels</li><li>List of correct responses to any trivia questions</li></ul> |
 | Smart View mobile integration	| <ul><li>Mobile application package attached to the TV application submission</li><li>Instructions for connecting the mobile application to the TV</li></ul> |
 | Geolocation or IP-restricted access | <ul><li>List of countries from which content can be accessed and permission to access the content through a VPN</li><li>Testing IP addresses added to allowed list</li></ul> |
-
-## Changes needed
-
-- [ ] Slide 1 - Add the demo server link or define how they can connect to the demo instance, they will not test it if they can´t connect to a server.
-- [ ] Slide 5 - Change the Username and Password to connect to a Demo server =>  User "demo", password "".
