@@ -12,7 +12,7 @@ Screenshots might need to be taken on a server with only child appropriate conte
 ## Image suggestion
 
 - [ ] [Home page image](./screenshot_jellyfin01.png) - We need to reduce the file size
-- [ ] [Movies page image](./screenshot_jellyfin02.png)
+- [X] [Movies page image](./screenshot_jellyfin02.png)
 - [ ] [Movies detail page image](./screenshot_jellyfin03.png) - We need to reduce the file size
 - [ ] TV shows page image
 - [ ] [Player image](./screenshot_jellyfin04.png) - We need to reduce the file size
