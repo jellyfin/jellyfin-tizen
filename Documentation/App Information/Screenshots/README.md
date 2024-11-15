@@ -11,6 +11,10 @@ And
 
 Note - first link does not specify file type, second link specifies JPG - so JPG selected for screenshots (PNG is a must for icons)
 
+|Application package | Dimensions | Format | Maximum Size | 
+|----------------|--------|--------|--------|
+|Application screenshot image | 1280x720 px or 1920x1080 px | JPG | 500 kB |
+
 
 - 1920 X 1080 px
 - JPG
