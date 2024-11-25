@@ -199,4 +199,47 @@
     }
 
     window.addEventListener('viewshow', updateKeys);
+
+    //Deeplink
+    var text = '';
+
+    function deepLink() {
+        var requestedAppControl = tizen.application.getCurrentApplication().getRequestedAppControl();
+        var appControlData;
+        var actionData;
+
+        if (requestedAppControl) {
+            appControlData = requestedAppControl.appControl.data; // get appcontrol data. action_data is in it.
+            text = '[TestApp] appControlData : ' + JSON.stringify(appControlData);
+            console.log(text);
+
+            for (var i = 0; i < appControlData.length; i++) {
+                console.log(appControlData[i].key);
+                if (appControlData[i].key == 'PAYLOAD') { // find PAYLOAD property.
+                    console.log('Payload');
+                    actionData = JSON.parse(appControlData[i].value[0]).values; // Get action_data
+                    console.log('aaaa ' + actionData);
+                    if (JSON.parse(actionData).serverid) { // in case Tile is video.
+                        var serverid = JSON.parse(actionData).serverid
+                        var id = JSON.parse(actionData).id
+
+                        text = '[TestApp] videoIdx : ' + serverid;
+                        var newUrl = "file:///www/index.html#/details?id=" + id + "&serverId=" + serverid;
+                        window.location.href = newUrl;
+                        console.log(newUrl);
+
+                    }
+                }
+            }
+        } else {
+            console.log('no req app control');
+        }
+    }
+
+
+    // add appcontrol event with deepLink function
+    window.addEventListener('appcontrol', deepLink);
+    // call deepLink function for first load
+    deepLink();
+
 })();
