@@ -107,6 +107,13 @@ function modifyIndex() {
             appMode.text = 'window.appMode=\'cordova\';';
             injectTarget.insertBefore(appMode, apploader);
 
+
+            // inject smarthub.js
+            const smarthub = this.createElement('script');
+            smarthub.setAttribute('src', '../smarthub.js');
+            smarthub.setAttribute('type', 'module');
+            injectTarget.insertBefore(smarthub, apploader);
+
             // inject tizen.js
             const tizen = this.createElement('script');
             tizen.setAttribute('src', '../tizen.js');
