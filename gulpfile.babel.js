@@ -111,7 +111,7 @@ function modifyIndex() {
             // inject smarthub.js
             const smarthub = this.createElement('script');
             smarthub.setAttribute('src', '../smarthub.js');
-            smarthub.setAttribute('type', 'module');
+            smarthub.setAttribute('defer', '');
             injectTarget.insertBefore(smarthub, apploader);
 
             // inject tizen.js

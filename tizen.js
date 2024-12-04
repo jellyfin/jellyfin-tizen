@@ -80,6 +80,32 @@
         console.log.apply(console, arguments);
     }
 
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            var script = document.createElement('script');
+            script.src = src;
+            script.type = 'text/javascript';
+            window.scriptReady = false;
+
+            script.onload = function () {
+                const checkReady = () => {
+                    if (window.scriptReady) {
+                        resolve();
+                    } else {
+                        setTimeout(checkReady, 100);
+                    }
+                };
+                checkReady();
+            };
+
+            script.onerror = function () {
+                reject(new Error(`SmartHubPreview not loaded ${src}`));
+            };
+
+            document.head.appendChild(script);
+        });
+    }
+
     window.NativeShell = {
         AppHost: {
             init: function () {
@@ -109,9 +135,15 @@
                 return AppInfo.deviceName;
             },
 
-            exit: function () {
-                postMessage('AppHost.exit');
-                tizen.application.getCurrentApplication().exit();
+            exit: async function () {
+                try {
+                    console.log('Refresh SmartHubPrewiev on exit...');
+                    await loadScript('../smarthub.js');
+                    postMessage('AppHost.exit');
+                    tizen.application.getCurrentApplication().exit();
+                } catch (error) {
+                    console.error('Error:', error.message);
+                }
             },
 
             getDefaultLayout: function () {
@@ -200,30 +232,40 @@
 
     window.addEventListener('viewshow', updateKeys);
 
-    //Deeplink
+    /**
+     * Handles deep linking by processing requested application control data
+     * to retrieve payload information and redirect to a specific URL.
+     *  *
+     * @see https://developer.samsung.com/smarttv/develop/guides/smart-hub-preview/implementing-public-preview.html#implementing-public-preview-deep-links
+     */
     var text = '';
-
     function deepLink() {
+
+        // Retrieve the app control request for the current application
         var requestedAppControl = tizen.application.getCurrentApplication().getRequestedAppControl();
-        var appControlData;
-        var actionData;
+        var appControlData; // Stores app control data
+        var actionData; // Stores parsed action data
 
         if (requestedAppControl) {
+            // Retrieve app control data
             appControlData = requestedAppControl.appControl.data; // get appcontrol data. action_data is in it.
-            text = '[TestApp] appControlData : ' + JSON.stringify(appControlData);
+            text = 'appControlData : ' + JSON.stringify(appControlData);
             console.log(text);
 
+            // Iterate over app control data to find the PAYLOAD key
             for (var i = 0; i < appControlData.length; i++) {
-                console.log(appControlData[i].key);
-                if (appControlData[i].key == 'PAYLOAD') { // find PAYLOAD property.
-                    console.log('Payload');
-                    actionData = JSON.parse(appControlData[i].value[0]).values; // Get action_data
-                    console.log('aaaa ' + actionData);
-                    if (JSON.parse(actionData).serverid) { // in case Tile is video.
+                if (appControlData[i].key == 'PAYLOAD') {
+
+                    // Parse the PAYLOAD value to extract action data
+                    actionData = JSON.parse(appControlData[i].value[0]).values;
+                    console.log('Get element info ' + actionData);
+
+                    // If the action data contains a server ID, assume it is a valid Jellifyn link
+                    if (JSON.parse(actionData).serverid) {
                         var serverid = JSON.parse(actionData).serverid
                         var id = JSON.parse(actionData).id
 
-                        text = '[TestApp] videoIdx : ' + serverid;
+                        // Construct the URL for the details page and redirect
                         var newUrl = "file:///www/index.html#/details?id=" + id + "&serverId=" + serverid;
                         window.location.href = newUrl;
                         console.log(newUrl);
