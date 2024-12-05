@@ -23,7 +23,10 @@ Release
 - [ ] Entering Application Feature Information (I believe HDR, and Player)
 - [ ] [Entering Verification Information](https://developer.samsung.com/tv-seller-office/guides/applications/entering-application-information.html#Entering-Verification-Information)
 
-- [Section 1 - UI Structure](/docs/App-UI-Description/1-UI-Structure/UI-Structure)
+
+## Requirements Sections
+
+- [Section 1 - UI Structure](/App-UI-Description/1-UI-Structure/UI-Structure)
 
 
 ## Certification & Verification
