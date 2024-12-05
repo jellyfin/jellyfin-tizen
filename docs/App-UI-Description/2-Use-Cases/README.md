@@ -40,3 +40,32 @@ Example:
 | Gaming | <ul><li>Cheat codes or master account for accessing all game levels</li><li>List of correct responses to any trivia questions</li></ul> |
 | Smart View mobile integration	| <ul><li>Mobile application package attached to the TV application submission</li><li>Instructions for connecting the mobile application to the TV</li></ul> |
 | Geolocation or IP-restricted access | <ul><li>List of countries from which content can be accessed and permission to access the content through a VPN</li><li>Testing IP addresses added to allowed list</li></ul> |
+
+## Project Response Section
+
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide01.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide02.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide03.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide04.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide05.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide06.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide07.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide08.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide09.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide10.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide11.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide12.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide13.png"/></a>
