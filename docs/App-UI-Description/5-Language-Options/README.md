@@ -86,14 +86,17 @@ The Jellyfin app supports language auto detection and the following languages:
 
 ## Screenshots
 
-![Home page](./01-Home-Page.png)
 *Home page*
 
-![Settings page](./02-Settings-Page.png)
+![Home page](./01-Home-Page.png)
+
 *Settings page*
 
-![Display settings page](./03-Display-Settings-Page.png)
+![Settings page](./02-Settings-Page.png)
+
 *Display settings page*
+
+![Display settings page](./03-Display-Settings-Page.png)
 
 ![Display settings save](./04-Display-Settings-Save.png)
 *Save display settings*
