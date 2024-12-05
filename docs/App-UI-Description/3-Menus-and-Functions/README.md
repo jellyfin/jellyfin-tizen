@@ -21,3 +21,33 @@ If the screenshots are not in English, provide translations for titles, headings
 <p align="center">
 <img alt="Usecase example" src="https://developer.samsung.com/media/3245/numberlabels_redesigned.png"/>
 </p>
+
+
+## Project Response Section
+
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide01.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide02.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide03.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide04.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide05.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide06.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide07.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide08.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide09.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide10.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide11.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide12.png"/></a>
+
+<img class="screenshot" alt="Translations" src="./Screenshots/Slide13.png"/></a>
