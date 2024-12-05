@@ -25,7 +25,7 @@ Release
 - [ ] [Entering Verification Information](https://developer.samsung.com/tv-seller-office/guides/applications/entering-application-information.html#Entering-Verification-Information)
 
 
-## Documentation for Requirements Sections
+## Documentation for project response sections
 
 - [Section 1 - UI Structure](/docs/App-UI-Description/1-UI-Structure/README.md)
 
