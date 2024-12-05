@@ -98,5 +98,6 @@ The Jellyfin app supports language auto detection and the following languages:
 
 ![Display settings page](./03-Display-Settings-Page.png)
 
-![Display settings save](./04-Display-Settings-Save.png)
 *Save display settings*
+
+![Display settings save](./04-Display-Settings-Save.png)
