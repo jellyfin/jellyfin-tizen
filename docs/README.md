@@ -8,6 +8,7 @@ Release
 
 
 # Submission Process
+
 ## Registration & Upgrade
 
 [Registering Applications](https://developer.samsung.com/tv-seller-office/guides/applications/registering-application.html)
@@ -27,6 +28,7 @@ Release
 ## Requirements Sections
 
 [Section 1 - UI Structure](/docs/App-UI-Description/1-UI-Structure/UI-Structure.md)
+
 [Section 2 - UI Structure](/docs/App-UI-Description/2-Use-Cases/README.md)
 
 
