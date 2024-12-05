@@ -26,7 +26,7 @@ Release
 
 ## Requirements Sections
 
-- [Section 1 - UI Structure](/App-UI-Description/1-UI-Structure/UI-Structure)
+- [Section 1 - UI Structure](/docs/App-UI-Description/1-UI-Structure/UI-Structure.md)
 
 
 ## Certification & Verification
