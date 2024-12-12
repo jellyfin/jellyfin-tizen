@@ -137,9 +137,9 @@
 
             exit: async function () {
                 try {
-                    console.log('Refresh SmartHubPrewiev on exit...');
-                    await loadScript('../smarthub.js');
-                    postMessage('AppHost.exit');
+                    //console.log('Refresh SmartHubPrewiev on exit...');
+                    //await loadScript('../smarthub.js');
+                    //postMessage('AppHost.exit');
                     tizen.application.getCurrentApplication().exit();
                 } catch (error) {
                     console.error('Error:', error.message);
