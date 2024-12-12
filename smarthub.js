@@ -1,9 +1,74 @@
-(function () {
+/*(function () {*/
 
   var packageId = tizen.application.getCurrentApplication().appInfo.packageId;
   var serviceId = packageId + ".service";
   var smartViewJsonData = undefined;
   var remoteMessagePort = undefined;
+  var localMessagePort = undefined;
+  var messagePortListener = undefined;
+
+  var localJsonData = {
+    "sections": [
+            {
+                "title": "Next Up",
+                "tiles": [
+                    {
+                        "title": "S11:E2 - 2. epizód",
+                        "subtitle": "Hívják a bábát",
+                        "image_ratio": "16by9",
+                        "image_url": "http://192.168.31.62:8096/Items/5f6a38a4adfd66d4d3e838f0bb19e050/Images/Backdrop?format=jpg&quality=96&fillHeight=250",
+                        "action_data": "{\"serverid\":\"4513d1afddd14932aa9cbddc0756cc87\",\"id\":\"65073997942266eccaf61c0e745c9f38\"}",
+                        "is_playable": true
+                    },
+                    {
+                        "title": "S8:E22 - The Proposal",
+                        "subtitle": "The Goldbergs (2013)",
+                        "image_ratio": "16by9",
+                        "image_url": "http://192.168.31.62:8096/Items/263cf89eb8bbfd0cf58f66daa421af38/Images/Backdrop?format=jpg&quality=96&fillHeight=250&percentPlayed=10.541836545589325",
+                        "action_data": "{\"serverid\":\"4513d1afddd14932aa9cbddc0756cc87\",\"id\":\"328b67745026c24c82bbeaf4ce569b9b\"}",
+                        "is_playable": true
+                    }
+                ]
+            },
+            {
+                "title": "Continue Watching",
+                "tiles": [
+                    {
+                        "title": "Men in Black - Sötét zsaruk 2.",
+                        "image_ratio": "16by9",
+                        "image_url": "http://192.168.31.62:8096/Items/7e149af90e93f9d3036529486862100f/Images/Thumb?format=jpg&quality=96&fillHeight=250&percentPlayed=58.40761698414322",
+                        "action_data": "{\"serverid\":\"4513d1afddd14932aa9cbddc0756cc87\",\"id\":\"7e149af90e93f9d3036529486862100f\"}",
+                        "is_playable": true
+                    },
+                    {
+                        "title": "S2:E10 - 10. epizód",
+                        "subtitle": "Psych - Dilis detektívek",
+                        "image_ratio": "16by9",
+                        "image_url": "http://192.168.31.62:8096/Items/019cf831e3a7cdf5bfaa3c968b3b5e93/Images/Backdrop?format=jpg&quality=96&fillHeight=250&percentPlayed=21.214575024153394",
+                        "action_data": "{\"serverid\":\"4513d1afddd14932aa9cbddc0756cc87\",\"id\":\"9bf364266aa530d637284d680a26516e\"}",
+                        "is_playable": true
+                    },
+                    {
+                        "title": "S4:E6 - Recipe for Death II: Kiss the Cook",
+                        "subtitle": "The Goldbergs (2013)",
+                        "image_ratio": "16by9",
+                        "image_url": "http://192.168.31.62:8096/Items/263cf89eb8bbfd0cf58f66daa421af38/Images/Backdrop?format=jpg&quality=96&fillHeight=250&percentPlayed=17.31943792713447",
+                        "action_data": "{\"serverid\":\"4513d1afddd14932aa9cbddc0756cc87\",\"id\":\"05d927035a6dcf525770dd46dcfaa21f\"}",
+                        "is_playable": true
+                    },
+                    {
+                        "title": "S8:E22 - The Proposal",
+                        "subtitle": "The Goldbergs (2013)",
+                        "image_ratio": "16by9",
+                        "image_url": "http://192.168.31.62:8096/Items/263cf89eb8bbfd0cf58f66daa421af38/Images/Backdrop?format=jpg&quality=96&fillHeight=250&percentPlayed=10.541836545589325",
+                        "action_data": "{\"serverid\":\"4513d1afddd14932aa9cbddc0756cc87\",\"id\":\"328b67745026c24c82bbeaf4ce569b9b\"}",
+                        "is_playable": true
+                    }
+                ]
+            }
+        ]
+};
+
 
 /**
  * Creates a JSON object representing one title for the smart view.
@@ -108,7 +173,10 @@
    * 
    * @throws {Error} Logs any error encountered during the service launch process.
   */
-  function startService() {
+  function startService(smartViewJsonData) {
+    console.log('Starting Service'),
+    localMessagePort = tizen.messageport.requestLocalMessagePort(packageId);
+    messagePortListener = localMessagePort.addMessagePortListener(OnReceived);
     try {
       tizen.application.launchAppControl(
         new tizen.ApplicationControl(
@@ -117,8 +185,7 @@
           'image/jpeg',
           null,
           [
-            new tizen.ApplicationControlData('caller', ["JSON.stringify(smartViewJsonData)"]),
-            new tizen.ApplicationControlData('Preview', ["JSON.stringify(smartViewJsonData)"])
+            new tizen.ApplicationControlData('Preview', [JSON.stringify(smartViewJsonData)])
           ]
         ),
         serviceId,
@@ -139,7 +206,7 @@
    */
   function sendMessageToService(key, value) {
     if (remoteMessagePort === undefined) {
-      remoteMessagePort = tizen.messageport.requestRemoteMessagePort(serviceId, "DATACHANNEL");
+      remoteMessagePort = tizen.messageport.requestRemoteMessagePort(serviceId, packageId);
     }
 
     if (remoteMessagePort) {
@@ -185,8 +252,6 @@
   }
 
 
-  var localMessagePort = tizen.messageport.requestLocalMessagePort("DATACHANNEL");
-  localMessagePort.addMessagePortListener(OnReceived);
 
 
   var interval = setInterval(function () {
@@ -206,10 +271,10 @@
           { section_title: "Continue Watching", limit: 4, data: resumableItems.Items }
         ]);
         console.log("Generated SmartViewResult: \n" + JSON.stringify(smartViewJsonData));
-  
         // Delay and send the smart view update request
         await delay(2000);
-        sendSmartViewUpdateRequest(smartViewJsonData);
+        startService(smartViewJsonData);
+        //sendSmartViewUpdateRequest(smartViewJsonData);
       } catch (error) {
         console.error("Error fetching data: ", error);
         window.scriptReady = true;
@@ -217,11 +282,10 @@
     };
   
     // Start the service and fetch the data
-    startService();
     fetchData();
 
   }, 1000);
 
-
+/*
 }
-)();
+)();*/
