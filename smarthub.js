@@ -43,6 +43,11 @@
     }
     
     if(title_data.Type =="Episode"){
+
+      action_data.type = 'episode';
+      action_data.seasonid = title_data.SeasonId;
+      action_data.seriesid = title_data.SeriesId;
+
       title = {
       title: "S" + title_data.ParentIndexNumber + ":E" + title_data.IndexNumber + " - " + title_data.Name,
       subtitle: title_data.SeriesName,
@@ -52,6 +57,7 @@
       is_playable: true
     };}
     else if(title_data.Type =="Movie"){
+      action_data.type = 'movie';
       title = {
         title: title_data.Name,
         image_ratio: "16by9",

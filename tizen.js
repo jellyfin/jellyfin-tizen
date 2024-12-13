@@ -235,13 +235,32 @@
 
                     // If the action data contains a server ID, assume it is a valid Jellifyn link
                     if (JSON.parse(actionData).serverid) {
-                        var serverid = JSON.parse(actionData).serverid
-                        var id = JSON.parse(actionData).id
+                        var serverid = JSON.parse(actionData).serverid;
+                        var id = JSON.parse(actionData).id;
+                        var type = JSON.parse(actionData).type;
+                        var seasonid = JSON.parse(actionData).seasonid;
+                        var seriesid = JSON.parse(actionData).seriesid;
 
+
+                        /* Based on  Deep-link Return Key Policy ( https://developer.samsung.com/smarttv/develop/guides/smart-hub-preview/smart-hub-preview.html#Deep-link-Return-Key-Policy)
+                           From a detail page within an application, clicking the “Return/Exit” key must display the previous page in the application.
+                           https://developer.samsung.com/media/2424/uxguidelines4.png
+                        */
+                        history.pushState({}, '', 'file:///www/home.html');
+                        if (type =='episode')
+                        {
+                            history.pushState({}, '', 'file:///www/index.html#/tv.html');
+                            history.pushState({}, '', "file:///www/index.html#/details?id=" + seriesid + "&serverId=" + serverid);
+                            history.pushState({}, '', "file:///www/index.html#/details?id=" + seasonid + "&serverId=" + serverid);
+
+                        }
+                        if (type =='movie')
+                        {
+                            history.pushState({}, '', 'file:///www/index.html#/movies.html');
+                        }
                         // Construct the URL for the details page and redirect
-                        var newUrl = "file:///www/index.html#/details?id=" + id + "&serverId=" + serverid;
-                        window.location.href = newUrl;
-                        console.log(newUrl);
+                        history.pushState({}, '', "file:///www/index.html#/details?id=" + id + "&serverId=" + serverid);
+
 
                     }
                 }
