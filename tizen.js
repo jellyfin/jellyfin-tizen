@@ -80,32 +80,6 @@
         console.log.apply(console, arguments);
     }
 
-    function loadScript(src) {
-        return new Promise((resolve, reject) => {
-            var script = document.createElement('script');
-            script.src = src;
-            script.type = 'text/javascript';
-            window.scriptReady = false;
-
-            script.onload = function () {
-                const checkReady = () => {
-                    if (window.scriptReady) {
-                        resolve();
-                    } else {
-                        setTimeout(checkReady, 100);
-                    }
-                };
-                checkReady();
-            };
-
-            script.onerror = function () {
-                reject(new Error(`SmartHubPreview not loaded ${src}`));
-            };
-
-            document.head.appendChild(script);
-        });
-    }
-
     window.NativeShell = {
         AppHost: {
             init: function () {
@@ -137,12 +111,11 @@
 
             exit: async function () {
                 try {
-                    //console.log('Refresh SmartHubPrewiev on exit...');
-                    //await loadScript('../smarthub.js');
-                    //postMessage('AppHost.exit');
+                    await runSmartViewUpdate();
                     tizen.application.getCurrentApplication().exit();
                 } catch (error) {
                     console.error('Error:', error.message);
+                    tizen.application.getCurrentApplication().exit();
                 }
             },
 
