@@ -149,7 +149,7 @@
    */
   var OnReceived = function (ui_data) {
     console.log("Received Data from Service : " + ui_data[0].value);
-    if (ui_data[0].value == 'Service stopping...'){
+    if (ui_data[0].value == 'Service stopping...' || ui_data[0].value == 'Service exiting...'){
       window.smartHubUpdated = true;
       localMessagePort.removeMessagePortListener(messagePortListener);
 
