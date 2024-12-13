@@ -83,11 +83,11 @@ function handleDataInRequest()
 
 module.exports.onStart = function () {
     logAndSend('OnStart recieved');
-    handleDataInRequest();
 };
 
 module.exports.onRequest = function () {
     logAndSend('onRequest recieved');
+    handleDataInRequest();
 }
 
 
