@@ -313,24 +313,37 @@ function getTileImageUrl(item) {
     const runSmartViewUpdate = async () => {
       window.smartHubUpdated = false;
       try {
+        var nextUpLimit = 2
+        var resumeLimit = 4
+
+        const baseOptions = {
+          Recursive: true,
+          ImageTypeLimit: 1,
+          EnableImageTypes: 'Primary,Backdrop,Thumb',
+          EnableTotalRecordCount: false,
+        };
+
+        var resumableOptions = Object.assign({}, baseOptions, { Limit: resumeLimit });
+        var nextUpOptions = Object.assign({}, baseOptions, { Limit: nextUpLimit, UserId: ApiClient.getCurrentUserId() });
+
         const [resumableItems, nextUpEpisodes] = await Promise.all([
-          ApiClient.getResumableItems(ApiClient.getCurrentUserId()),
-          ApiClient.getNextUpEpisodes(ApiClient.getCurrentUserId())
+          ApiClient.getResumableItems(ApiClient.getCurrentUserId(), resumableOptions),
+          ApiClient.getNextUpEpisodes(nextUpOptions)
         ]);
-  
+
         // Generate smart view data
         const smartViewJsonData = generateSmartViewJson([
-          { section_title: "Next Up", limit: 2, data: nextUpEpisodes.Items },
-          { section_title: "Continue Watching", limit: 4, data: resumableItems.Items }
+          { section_title: "Next Up", limit: nextUpLimit, data: nextUpEpisodes.Items },
+          { section_title: "Continue Watching", limit: resumeLimit, data: resumableItems.Items }
         ]);
-  
+
         console.log("Generated SmartViewResult: \n" + JSON.stringify(smartViewJsonData));
-  
+
         // Delay and send the smart view update request
         await delay(2000);
         startServiceAndUpdateSmartView(smartViewJsonData);
         await waitForSmartHubUpdate();
-  
+
       } catch (error) {
         console.error("Error fetching data: ", error);
         window.smartHubUpdated = true;
