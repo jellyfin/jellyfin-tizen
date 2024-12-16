@@ -6,6 +6,129 @@
   var localMessagePort = undefined;
   var messagePortListener = undefined;
 
+
+
+
+
+/** Get the URL of the card's image.
+ * @param {Object} item - Item for which to generate tileimageurk
+ * @returns {CardImageUrl} Object representing the URL of the card's image.
+ */
+function getTileImageUrl(item) {
+  item = item.ProgramInfo || item;
+
+  options ={
+    preferThumb: true,
+    inheritThumb: true,
+  }
+
+  preferThumb = true;
+  let height = 250;
+  let imgUrl = null;
+  let imgTag = null;
+  let imgType = null;
+  let itemId = null;
+
+  /* eslint-disable sonarjs/no-duplicated-branches */
+  if (options.preferThumb && item.ImageTags && item.ImageTags.Thumb) {
+      imgType = 'Thumb';
+      imgTag = item.ImageTags.Thumb;
+  } else if (options.preferThumb && item.SeriesThumbImageTag && options.inheritThumb !== false) {
+      imgType = 'Thumb';
+      imgTag = item.SeriesThumbImageTag;
+      itemId = item.SeriesId;
+  } else if (options.preferThumb && item.ParentThumbItemId && options.inheritThumb !== false && item.MediaType !== 'Photo') {
+      imgType = 'Thumb';
+      imgTag = item.ParentThumbImageTag;
+      itemId = item.ParentThumbItemId;
+  } else if (options.preferThumb && item.BackdropImageTags && item.BackdropImageTags.length) {
+      imgType = 'Backdrop';
+      imgTag = item.BackdropImageTags[0];
+      forceName = true;
+  } else if (options.preferThumb && item.ParentBackdropImageTags && item.ParentBackdropImageTags.length && options.inheritThumb !== false && item.Type === 'Episode') {
+      imgType = 'Backdrop';
+      imgTag = item.ParentBackdropImageTags[0];
+      itemId = item.ParentBackdropItemId;
+  } else if (item.ImageTags && item.ImageTags.Primary && (item.Type !== 'Episode' || item.ChildCount !== 0)) {
+      imgType = 'Primary';
+      imgTag = item.ImageTags.Primary;
+
+      if (primaryImageAspectRatio && uiAspect) {
+          coverImage = (Math.abs(primaryImageAspectRatio - uiAspect) / uiAspect) <= 0.2;
+      }
+  } else if (item.SeriesPrimaryImageTag) {
+      imgType = 'Primary';
+      imgTag = item.SeriesPrimaryImageTag;
+      itemId = item.SeriesId;
+  } else if (item.PrimaryImageTag) {
+      imgType = 'Primary';
+      imgTag = item.PrimaryImageTag;
+      itemId = item.PrimaryImageItemId;
+
+      if (primaryImageAspectRatio && uiAspect) {
+          coverImage = (Math.abs(primaryImageAspectRatio - uiAspect) / uiAspect) <= 0.2;
+      }
+  } else if (item.ParentPrimaryImageTag) {
+      imgType = 'Primary';
+      imgTag = item.ParentPrimaryImageTag;
+      itemId = item.ParentPrimaryImageItemId;
+  } else if (item.AlbumId && item.AlbumPrimaryImageTag) {
+      imgType = 'Primary';
+      imgTag = item.AlbumPrimaryImageTag;
+      itemId = item.AlbumId;
+
+      if (primaryImageAspectRatio && uiAspect) {
+          coverImage = (Math.abs(primaryImageAspectRatio - uiAspect) / uiAspect) <= 0.2;
+      }
+  } else if (item.Type === 'Season' && item.ImageTags && item.ImageTags.Thumb) {
+      imgType = 'Thumb';
+      imgTag = item.ImageTags.Thumb;
+  } else if (item.BackdropImageTags && item.BackdropImageTags.length) {
+      imgType = 'Backdrop';
+      imgTag = item.BackdropImageTags[0];
+  } else if (item.ImageTags && item.ImageTags.Thumb) {
+      imgType = 'Thumb';
+      imgTag = item.ImageTags.Thumb;
+  } else if (item.SeriesThumbImageTag && options.inheritThumb !== false) {
+      imgType = 'Thumb';
+      imgTag = item.SeriesThumbImageTag;
+      itemId = item.SeriesId;
+  } else if (item.ParentThumbItemId && options.inheritThumb !== false) {
+      imgType = 'Thumb';
+      imgTag = item.ParentThumbImageTag;
+      itemId = item.ParentThumbItemId;
+  } else if (item.ParentBackdropImageTags && item.ParentBackdropImageTags.length && options.inheritThumb !== false) {
+      imgType = 'Backdrop';
+      imgTag = item.ParentBackdropImageTags[0];
+      itemId = item.ParentBackdropItemId;
+  }
+  /* eslint-enable sonarjs/no-duplicated-branches */
+
+  if (!itemId) {
+      itemId = item.Id;
+  }
+
+  if (imgTag && imgType) {
+      var params = {
+        type: imgType,
+        fillHeight: height,
+        quality: 96,
+        tag: imgTag,
+        format: "jpg"
+      };
+      var playedPercentage = item && item.UserData && item.UserData.PlayedPercentage;
+      if (playedPercentage !== null && playedPercentage !== undefined) {
+        params.percentPlayed = playedPercentage;
+      }
+      imgUrl = ApiClient.getScaledImageUrl(itemId, params);
+  }
+
+  return imgUrl;
+
+}
+
+
+
   
 /**
  * Creates a JSON object representing one title for the smart view.
@@ -29,6 +152,7 @@
       return null;
     }
 
+
     var action_data =
     {
       serverid: title_data.ServerId,
@@ -36,23 +160,23 @@
     };
     var title = null;
 
-    var playedPercentage = "";
+    var imgURL = getTileImageUrl(title_data);
 
-    if (title_data.UserData && title_data.UserData.PlayedPercentage) {
-      playedPercentage = "&percentPlayed=" + title_data.UserData.PlayedPercentage;
-    }
     
     if(title_data.Type =="Episode"){
 
       action_data.type = 'episode';
       action_data.seasonid = title_data.SeasonId;
       action_data.seriesid = title_data.SeriesId;
+      series_episode = "";
+      if (title_data.ParentIndexNumber !== undefined  && title_data.IndexNumber !== undefined)
+        series_episode = "S" + title_data.ParentIndexNumber + ":E" + title_data.IndexNumber + " - " 
 
       title = {
-      title: "S" + title_data.ParentIndexNumber + ":E" + title_data.IndexNumber + " - " + title_data.Name,
+      title: series_episode + title_data.Name,
       subtitle: title_data.SeriesName,
       image_ratio: "16by9",
-      image_url: ApiClient.serverAddress() + "/Items/" + title_data.ParentBackdropItemId + "/Images/Backdrop?format=jpg&quality=96&fillHeight=250" + playedPercentage,
+      image_url: imgURL,
       action_data: JSON.stringify(action_data),
       is_playable: true
     };}
@@ -61,7 +185,7 @@
       title = {
         title: title_data.Name,
         image_ratio: "16by9",
-        image_url: ApiClient.serverAddress() +"/Items/" + title_data.Id + "/Images/Thumb?format=jpg&quality=96&fillHeight=250" + playedPercentage,
+        image_url: imgURL,
         action_data: JSON.stringify(action_data),
         is_playable: true
       };
