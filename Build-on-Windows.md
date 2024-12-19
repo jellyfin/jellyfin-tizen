@@ -18,9 +18,9 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
    > It is recommended that the web version match the server version.
 
    ```bat
-   git clone -b release-10.9.z https://github.com/jellyfin/jellyfin-web.git
+   git clone -b release-10.10.z https://github.com/jellyfin/jellyfin-web.git
    ```
-   > Replace `release-10.9.z` with the name of the branch you want to build.
+   > Replace `release-10.10.z` with the name of the branch you want to build.
 
    > You can also use `git checkout` to switch branches.
 5. Clone or download Jellyfin Tizen (this) repository.
@@ -30,30 +30,55 @@ _Commands in this guide are for Windows Command Prompt or Batch files. Most of t
 
 ### Build Jellyfin Web
 
+For version 10.9+:
 ```bat
 cd jellyfin-web
-set SKIP_PREPARE=1
 set USE_SYSTEM_FONTS=1
 npm ci --no-audit
 npm run build:production
 ```
+
+> `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
+
 <details>
-    <summary><i>For Windows PowerShell</i></summary>
+    <summary><i>For version 10.8-:</i></summary>
+
+
+```bat
+cd jellyfin-web
+set SKIP_PREPARE=1
+npm ci --no-audit
+npm run build:production
+```
+`SKIP_PREPARE=1` is needed for version 10.8-.
+</details>
+
+<details>
+    <summary><i>For Windows PowerShell 10.9+:</i></summary>
 
 ```powershell
 cd jellyfin-web
-$env:SKIP_PREPARE=1
 $env:USE_SYSTEM_FONTS=1
 npm ci --no-audit
 npm run build:production
 ```
+> `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
 </details>
 
+<details>
+    <summary><i>For Windows PowerShell 10.8-:</i></summary>
+
+```powershell
+cd jellyfin-web
+$env:SKIP_PREPARE=1
+npm ci --no-audit
+npm run build:production
+```
+`SKIP_PREPARE=1` is needed for version 10.8-.
+</details>
+<br>
 > You should get `jellyfin-web/dist/` directory.
 
-> `set SKIP_PREPARE=1` can be omitted for 10.9+.
-
-> `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
 
 > Use `npm run build:development` if you want to debug the app.
 
@@ -90,7 +115,7 @@ If any changes are made to `jellyfin-web/dist/`, the `jellyfin-tizen/www/` direc
 > Make sure you select the appropriate Certificate Profile in Tizen Certificate Manager. This determines which devices you can install the widget on.
 
 ```bat
-tizen.bat build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+tizen.bat build-web -e ".*" -e gulpfile.babel.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
 tizen.bat package -t wgt -o . -- .buildResult
 ```
 
