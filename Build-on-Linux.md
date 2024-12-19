@@ -30,13 +30,11 @@ _This is a guide for Ubuntu. But I believe that Tizen Studio can be installed on
 
 ```sh
 cd jellyfin-web
-SKIP_PREPARE=1 npm ci --no-audit
+npm ci --no-audit
 USE_SYSTEM_FONTS=1 npm run build:production
 ```
 
 > You should get `jellyfin-web/dist/` directory.
-
-> `SKIP_PREPARE=1` can be omitted for 10.9+.
 
 > `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
 
