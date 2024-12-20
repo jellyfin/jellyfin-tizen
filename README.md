@@ -26,9 +26,9 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
    > It is recommended that the web version match the server version.
 
    ```sh
-   git clone -b release-10.9.z https://github.com/jellyfin/jellyfin-web.git
+   git clone -b release-10.10.z https://github.com/jellyfin/jellyfin-web.git
    ```
-   > Replace `release-10.9.z` with the name of the branch you want to build.
+   > Replace `release-10.10.z` with the name of the branch you want to build.
 
    > You can also use `git checkout` to switch branches.
 5. Clone or download Jellyfin Tizen (this) repository.
@@ -38,17 +38,24 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 
 ### Build Jellyfin Web
 
+For version 10.9+:
 ```sh
 cd jellyfin-web
-SKIP_PREPARE=1 npm ci --no-audit
+npm ci --no-audit
 USE_SYSTEM_FONTS=1 npm run build:production
 ```
 
-> You should get `jellyfin-web/dist/` directory.
-
-> `SKIP_PREPARE=1` can be omitted for 10.9+.
-
 > `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
+
+For version 10.8-:
+```sh
+cd jellyfin-web
+SKIP_PREPARE=1 npm ci --no-audit
+npm run build:production
+```
+> `SKIP_PREPARE=1` is needed for version 10.8-.
+
+> You should get `jellyfin-web/dist/` directory.
 
 > Use `npm run build:development` if you want to debug the app.
 
@@ -75,7 +82,7 @@ If any changes are made to `jellyfin-web/dist/`, the `jellyfin-tizen/www/` direc
 > Make sure you select the appropriate Certificate Profile in Tizen Certificate Manager. This determines which devices you can install the widget on.
 
 ```sh
-tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+tizen build-web -e ".*" -e gulpfile.babel.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
 tizen package -t wgt -o . -- .buildResult
 ```
 
