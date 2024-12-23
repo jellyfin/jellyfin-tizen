@@ -122,3 +122,18 @@ tizen package -t wgt -o . -- .buildResult
    tizen install -n Jellyfin.wgt -t UE65NU7400
    ```
    > Specify target with `-t` option. Use `sdb devices` to list them.
+
+### Deploy to TV without Tizen CLI (unofficial)
+
+_Warning: these instructions are unofficial and not supported by the jellyfin team. They offer a slightly easier install than the instruction above, if you have Docker installed on your system. 
+For more details see [this repo](https://github.com/Georift/install-jellyfin-tizen)._
+
+1. [Ensure your Samsung TV is in developer mode](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html#Connecting-the-TV-and-SDK)
+	- If you're having trouble, make sure you're using the "123" button on the remote when typing in "12345".
+	- Set the IP of your compter on the TV under _Host PC IP_
+	
+2. Run this command replacing the final argument with the IP of your Samsung TV
+
+```bash
+docker run --rm georift/install-jellyfin-tizen <samsung tv ip>
+```
