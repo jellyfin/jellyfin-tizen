@@ -7,6 +7,7 @@
     <description>Jellyfin for Samsung Smart TV (Tizen).</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="icon.png"/>
+    <license href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3.0</license>
     <name>Jellyfin</name>
     <tizen:privilege name="http://developer.samsung.com/privilege/productinfo"/>
     <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
