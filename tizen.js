@@ -233,13 +233,16 @@
                     actionData = JSON.parse(appControlData[i].value[0]).values;
                     console.log('Get element info ' + actionData);
 
+                    // Store the parsed action data in a variable
+                    const parsedActionData = JSON.parse(actionData);
+
                     // If the action data contains a server ID, assume it is a valid Jellifyn link
-                    if (JSON.parse(actionData).serverid) {
-                        var serverid = JSON.parse(actionData).serverid;
-                        var id = JSON.parse(actionData).id;
-                        var type = JSON.parse(actionData).type;
-                        var seasonid = JSON.parse(actionData).seasonid;
-                        var seriesid = JSON.parse(actionData).seriesid;
+                    if (parsedActionData.serverid) {
+                        var serverid = parsedActionData.serverid;
+                        var id = parsedActionData.id;
+                        var type = parsedActionData.type;
+                        var seasonid = parsedActionData.seasonid;
+                        var seriesid = parsedActionData.seriesid;
 
 
                         /* Based on  Deep-link Return Key Policy ( https://developer.samsung.com/smarttv/develop/guides/smart-hub-preview/smart-hub-preview.html#Deep-link-Return-Key-Policy)
