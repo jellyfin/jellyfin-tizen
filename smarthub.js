@@ -48,10 +48,6 @@ function getTileImageUrl(item) {
   } else if (item.ImageTags && item.ImageTags.Primary && (item.Type !== 'Episode' || item.ChildCount !== 0)) {
       imgType = 'Primary';
       imgTag = item.ImageTags.Primary;
-
-      if (primaryImageAspectRatio && uiAspect) {
-          coverImage = (Math.abs(primaryImageAspectRatio - uiAspect) / uiAspect) <= 0.2;
-      }
   } else if (item.SeriesPrimaryImageTag) {
       imgType = 'Primary';
       imgTag = item.SeriesPrimaryImageTag;
@@ -60,10 +56,6 @@ function getTileImageUrl(item) {
       imgType = 'Primary';
       imgTag = item.PrimaryImageTag;
       itemId = item.PrimaryImageItemId;
-
-      if (primaryImageAspectRatio && uiAspect) {
-          coverImage = (Math.abs(primaryImageAspectRatio - uiAspect) / uiAspect) <= 0.2;
-      }
   } else if (item.ParentPrimaryImageTag) {
       imgType = 'Primary';
       imgTag = item.ParentPrimaryImageTag;
@@ -72,10 +64,6 @@ function getTileImageUrl(item) {
       imgType = 'Primary';
       imgTag = item.AlbumPrimaryImageTag;
       itemId = item.AlbumId;
-
-      if (primaryImageAspectRatio && uiAspect) {
-          coverImage = (Math.abs(primaryImageAspectRatio - uiAspect) / uiAspect) <= 0.2;
-      }
   } else if (item.Type === 'Season' && item.ImageTags && item.ImageTags.Thumb) {
       imgType = 'Thumb';
       imgTag = item.ImageTags.Thumb;
