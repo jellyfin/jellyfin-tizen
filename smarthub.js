@@ -17,12 +17,8 @@
 function getTileImageUrl(item) {
   item = item.ProgramInfo || item;
 
-  options ={
-    preferThumb: true,
-    inheritThumb: true,
-  }
-
-  preferThumb = true;
+  let preferThumb = true;
+  let inheritThumb = true;
   let height = 250;
   let imgUrl = null;
   let imgTag = null;
@@ -30,22 +26,22 @@ function getTileImageUrl(item) {
   let itemId = null;
 
   /* eslint-disable sonarjs/no-duplicated-branches */
-  if (options.preferThumb && item.ImageTags && item.ImageTags.Thumb) {
+  if (preferThumb && item.ImageTags && item.ImageTags.Thumb) {
       imgType = 'Thumb';
       imgTag = item.ImageTags.Thumb;
-  } else if (options.preferThumb && item.SeriesThumbImageTag && options.inheritThumb !== false) {
+  } else if (preferThumb && item.SeriesThumbImageTag && inheritThumb !== false) {
       imgType = 'Thumb';
       imgTag = item.SeriesThumbImageTag;
       itemId = item.SeriesId;
-  } else if (options.preferThumb && item.ParentThumbItemId && options.inheritThumb !== false && item.MediaType !== 'Photo') {
+  } else if (preferThumb && item.ParentThumbItemId && inheritThumb !== false && item.MediaType !== 'Photo') {
       imgType = 'Thumb';
       imgTag = item.ParentThumbImageTag;
       itemId = item.ParentThumbItemId;
-  } else if (options.preferThumb && item.BackdropImageTags && item.BackdropImageTags.length) {
+  } else if (preferThumb && item.BackdropImageTags && item.BackdropImageTags.length) {
       imgType = 'Backdrop';
       imgTag = item.BackdropImageTags[0];
       forceName = true;
-  } else if (options.preferThumb && item.ParentBackdropImageTags && item.ParentBackdropImageTags.length && options.inheritThumb !== false && item.Type === 'Episode') {
+  } else if (preferThumb && item.ParentBackdropImageTags && item.ParentBackdropImageTags.length && inheritThumb !== false && item.Type === 'Episode') {
       imgType = 'Backdrop';
       imgTag = item.ParentBackdropImageTags[0];
       itemId = item.ParentBackdropItemId;
@@ -89,15 +85,15 @@ function getTileImageUrl(item) {
   } else if (item.ImageTags && item.ImageTags.Thumb) {
       imgType = 'Thumb';
       imgTag = item.ImageTags.Thumb;
-  } else if (item.SeriesThumbImageTag && options.inheritThumb !== false) {
+  } else if (item.SeriesThumbImageTag && inheritThumb !== false) {
       imgType = 'Thumb';
       imgTag = item.SeriesThumbImageTag;
       itemId = item.SeriesId;
-  } else if (item.ParentThumbItemId && options.inheritThumb !== false) {
+  } else if (item.ParentThumbItemId && inheritThumb !== false) {
       imgType = 'Thumb';
       imgTag = item.ParentThumbImageTag;
       itemId = item.ParentThumbItemId;
-  } else if (item.ParentBackdropImageTags && item.ParentBackdropImageTags.length && options.inheritThumb !== false) {
+  } else if (item.ParentBackdropImageTags && item.ParentBackdropImageTags.length && inheritThumb !== false) {
       imgType = 'Backdrop';
       imgTag = item.ParentBackdropImageTags[0];
       itemId = item.ParentBackdropItemId;
