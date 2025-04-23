@@ -3,6 +3,31 @@
 
     console.log('Tizen adapter');
 
+    // Function to get the Tizen version
+    function getTizenVersion() {
+        try {
+            const version = tizen.systeminfo.getCapability('http://tizen.org/feature/platform.version');
+            return parseFloat(version);
+        } catch (error) {
+            console.warn('Unable to determine Tizen version:', error);
+            return 0; // Default to 0 if version cannot be determined
+        }
+    }
+
+    // Check Tizen version and dynamically load smarthub.js if supported
+    const tizenVersion = getTizenVersion();
+    if (tizenVersion > 3) {
+        console.log('Loading smarthub.js for Tizen version:', tizenVersion);
+
+        // Dynamically load smarthub.js
+        const script = document.createElement('script');
+        script.src = '../smarthub.js';
+        script.defer = true;
+        document.head.appendChild(script);
+    } else {
+        console.log('Skipping smarthub.js for Tizen version:', tizenVersion);
+    }
+
     // Similar to jellyfin-web
     function generateDeviceId() {
         return btoa([navigator.userAgent, new Date().getTime()].join('|')).replace(/=/g, '1');
