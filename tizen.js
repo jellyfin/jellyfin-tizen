@@ -179,6 +179,12 @@
         }
     };
 
+    window.addEventListener('visibilitychange', function () {
+        if (!document.hidden) {
+            window.location.reload();
+        }
+    });
+
     window.addEventListener('load', function () {
         tizen.tvinputdevice.registerKey('MediaPlay');
         tizen.tvinputdevice.registerKey('MediaPause');
