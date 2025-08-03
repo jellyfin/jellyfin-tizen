@@ -1,0 +1,53 @@
+name: Build Jellyfin Tizen
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-wgt:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Tizen Studio
+        run: |
+          sudo apt update
+          sudo apt install -y pciutils zip libncurses5 python libpython2.7
+          sudo apt clean
+          curl https://usa.sdk-dl.tizen.org/web-cli_Tizen_Studio_4.5.1_usa_ubuntu-64.bin -o install.bin
+          chmod a+x install.bin
+          ./install.bin --accept-license $HOME/tizen-studio
+          rm install.bin
+      - name: Install Tizen packages
+        run: |
+          $HOME/tizen-studio/package-manager/package-manager-cli.bin install \
+          Certificate-Manager NativeCLI cert-add-on --accept-license
+      - name: Prepare Jellyfin Web
+        run: |
+          git clone https://github.com/jellyfin/jellyfin-web.git
+          cd jellyfin-web
+          git checkout be195b0
+          yarn install --frozen-lockfile
+      - name: Prepare Jellyfin Tizen
+        run: |
+          git clone https://github.com/jellyfin/jellyfin-tizen.git
+          cd jellyfin-tizen
+          JELLYFIN_WEB_DIR=../jellyfin-web/dist yarn install
+      - name: Run Tizen CLI build
+        run: |
+          cd jellyfin-tizen
+          export PATH=$PATH:$HOME/tizen-studio/tools/ide/bin
+          tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          tizen certificate -a test -f test -n test -p testtest
+          tizen package -t wgt -o . -- .buildResult
+      - name: Failure
+        if: failure()
+        run: |
+          cat $HOME/tizen-studio-data/cli/logs/cli.log
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: jellyfin-10.7.7
+          path: ./jellyfin-tizen/Jellyfin.wgt
+          if-no-files-found: error
