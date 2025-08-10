@@ -14,7 +14,7 @@
     "@babel/preset-env": "7.25.7",
     "@babel/register": "7.25.7",
     "del": "8.0.0",
-    "gulp": "5.0.0",
+    "gulp": "5.0.1",
     "gulp-dom": "1.0.0",
     "gulp-if": "3.0.0",
     "gulp-scan": "0.1.4"
