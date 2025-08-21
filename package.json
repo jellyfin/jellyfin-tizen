@@ -11,8 +11,8 @@
     "postinstall": "gulp"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.25.7",
-    "@babel/register": "7.25.7",
+    "@babel/preset-env": "7.28.3",
+    "@babel/register": "7.28.3",
     "del": "8.0.0",
     "gulp": "5.0.0",
     "gulp-dom": "1.0.0",
