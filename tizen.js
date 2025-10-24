@@ -3,6 +3,31 @@
 
     console.log('Tizen adapter');
 
+    // Function to get the Tizen version
+    function getTizenVersion() {
+        try {
+            const version = tizen.systeminfo.getCapability('http://tizen.org/feature/platform.version');
+            return parseFloat(version);
+        } catch (error) {
+            console.warn('Unable to determine Tizen version:', error);
+            return 0; // Default to 0 if version cannot be determined
+        }
+    }
+
+    // Check Tizen version and dynamically load smarthub.js if supported
+    const tizenVersion = getTizenVersion();
+    if (tizenVersion > 3) {
+        console.log('Loading smarthub.js for Tizen version:', tizenVersion);
+
+        // Dynamically load smarthub.js
+        const script = document.createElement('script');
+        script.src = '../smarthub.js';
+        script.defer = true;
+        document.head.appendChild(script);
+    } else {
+        console.log('Skipping smarthub.js for Tizen version:', tizenVersion);
+    }
+
     // Similar to jellyfin-web
     function generateDeviceId() {
         return btoa([navigator.userAgent, new Date().getTime()].join('|')).replace(/=/g, '1');
@@ -109,9 +134,14 @@
                 return AppInfo.deviceName;
             },
 
-            exit: function () {
-                postMessage('AppHost.exit');
-                tizen.application.getCurrentApplication().exit();
+            exit: async function () {
+                try {
+                    await runSmartViewUpdate();
+                    tizen.application.getCurrentApplication().exit();
+                } catch (error) {
+                    console.error('Error:', error.message);
+                    tizen.application.getCurrentApplication().exit();
+                }
             },
 
             getDefaultLayout: function () {
@@ -199,4 +229,79 @@
     }
 
     window.addEventListener('viewshow', updateKeys);
+
+    /**
+     * Handles deep linking by processing requested application control data
+     * to retrieve payload information and redirect to a specific URL.
+     *  *
+     * @see https://developer.samsung.com/smarttv/develop/guides/smart-hub-preview/implementing-public-preview.html#implementing-public-preview-deep-links
+     */
+    var text = '';
+    function deepLink() {
+
+        // Retrieve the app control request for the current application
+        var requestedAppControl = tizen.application.getCurrentApplication().getRequestedAppControl();
+        var appControlData; // Stores app control data
+        var actionData; // Stores parsed action data
+
+        if (requestedAppControl) {
+            // Retrieve app control data
+            appControlData = requestedAppControl.appControl.data; // get appcontrol data. action_data is in it.
+            text = 'appControlData : ' + JSON.stringify(appControlData);
+            console.log(text);
+
+            // Iterate over app control data to find the PAYLOAD key
+            for (var i = 0; i < appControlData.length; i++) {
+                if (appControlData[i].key == 'PAYLOAD') {
+
+                    // Parse the PAYLOAD value to extract action data
+                    actionData = JSON.parse(appControlData[i].value[0]).values;
+                    console.log('Get element info ' + actionData);
+
+                    // Store the parsed action data in a variable
+                    const parsedActionData = JSON.parse(actionData);
+
+                    // If the action data contains a server ID, assume it is a valid Jellifyn link
+                    if (parsedActionData.serverid) {
+                        var serverid = parsedActionData.serverid;
+                        var id = parsedActionData.id;
+                        var type = parsedActionData.type;
+                        var seasonid = parsedActionData.seasonid;
+                        var seriesid = parsedActionData.seriesid;
+
+
+                        /* Based on  Deep-link Return Key Policy ( https://developer.samsung.com/smarttv/develop/guides/smart-hub-preview/smart-hub-preview.html#Deep-link-Return-Key-Policy)
+                           From a detail page within an application, clicking the “Return/Exit” key must display the previous page in the application.
+                           https://developer.samsung.com/media/2424/uxguidelines4.png
+                        */
+                        history.pushState({}, '', 'file:///www/home.html');
+                        if (type =='episode')
+                        {
+                            history.pushState({}, '', 'file:///www/index.html#/tv.html');
+                            history.pushState({}, '', "file:///www/index.html#/details?id=" + seriesid + "&serverId=" + serverid);
+                            history.pushState({}, '', "file:///www/index.html#/details?id=" + seasonid + "&serverId=" + serverid);
+
+                        }
+                        if (type =='movie')
+                        {
+                            history.pushState({}, '', 'file:///www/index.html#/movies.html');
+                        }
+                        // Construct the URL for the details page and redirect
+                        history.pushState({}, '', "file:///www/index.html#/details?id=" + id + "&serverId=" + serverid);
+
+
+                    }
+                }
+            }
+        } else {
+            console.log('no req app control');
+        }
+    }
+
+
+    // add appcontrol event with deepLink function
+    window.addEventListener('appcontrol', deepLink);
+    // call deepLink function for first load
+    deepLink();
+
 })();
