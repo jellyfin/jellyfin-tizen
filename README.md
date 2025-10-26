@@ -13,7 +13,7 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ### Prerequisites
 * Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI. See [Installing TV SDK](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html).
 * Git
-* Node.js 20+
+* Node.js 20.9.0+
 
 ### Getting Started
 
@@ -41,7 +41,8 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 ```sh
 cd jellyfin-web
 npm ci --no-audit
-USE_SYSTEM_FONTS=1 npm run build:production
+USE_SYSTEM_FONTS=1
+npm run build:production
 ```
 
 > You should get `jellyfin-web/dist/` directory.
@@ -56,7 +57,8 @@ If any changes are made to `jellyfin-web/`, the `jellyfin-web/dist/` directory w
 
 ```sh
 cd jellyfin-tizen
-JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+JELLYFIN_WEB_DIR=../jellyfin-web/dist
+npm ci --no-audit
 ```
 
 > You should get `jellyfin-tizen/www/` directory.
