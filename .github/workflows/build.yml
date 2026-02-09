@@ -1,7 +1,6 @@
 name: Build WGT
 
 on:
-  push:
   workflow_dispatch:
 
 env:
