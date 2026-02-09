@@ -63,6 +63,23 @@ jobs:
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen package -t wgt -o ./release -- .buildResult
+          
+      - name: Print job summary
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
+          ## Package Signing Required
+
+          The `Jellyfin.wgt` package is **not signed**.
+
+          ### To sign the package:
+    
+          1. Download the `Jellyfin.wgt` artifact from this workflow run
+          2. Run the following command:
+          
+          ```bash
+          tizen package -t wgt -s MyProfile -- Jellyfin.wgt
+          ```
+          EOF
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v6
