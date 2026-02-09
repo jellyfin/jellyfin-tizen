@@ -1,0 +1,116 @@
+name: Build WGT
+
+on:
+  workflow_dispatch:
+
+env:
+  TIZEN_STUDIO_VER: 4.5.1
+
+jobs:
+  build:
+    name: Build Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cache Tizen Studio
+        id: cache-tizen
+        uses: actions/cache@v5
+        with:
+          path: ${{ github.workspace }}/tizen-studio
+          key: tizen-studio-${{ env.TIZEN_STUDIO_VER }}
+
+      - name: Download Tizen-Studio
+        if: steps.cache-tizen.outputs.cache-hit != 'true'
+        run: |
+          curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
+
+      - name: Install Tizen-Studio
+        if: steps.cache-tizen.outputs.cache-hit != 'true'
+        run: |
+          chmod +x tizen-installer
+          ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
+          rm ./tizen-installer  
+
+      - name: Add Tizen Studio to PATH
+        run: |
+          echo "${GITHUB_WORKSPACE}/tizen-studio/tools/ide/bin" >> $GITHUB_PATH
+
+      - name: Clone jellyfin-tizen
+        uses: actions/checkout@v6
+        with:
+          repository: 'jellyfin/jellyfin-tizen'
+          path: 'jellyfin-tizen'
+          ref: 'master'
+
+      - name: Get latest jellyfin-web release
+        id: latestrelease
+        run: |
+          echo "releasetag=$(curl -s https://api.github.com/repos/jellyfin/jellyfin-web/releases/latest | jq '.tag_name' | sed 's/\"//g')" >> "$GITHUB_OUTPUT"
+
+      - name: Clone jellyfin-web
+        uses: actions/checkout@v6
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          path: 'jellyfin-web'
+          ref: ${{ steps.latestrelease.outputs.releasetag }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'v23.11.1'
+          cache: 'npm'
+          cache-dependency-path: |
+            jellyfin-web/package-lock.json
+            jellyfin-tizen/package-lock.json
+
+      - name: Cache jellyfin-web dist
+        id: cache-web-dist
+        uses: actions/cache@v5
+        with:
+          path: jellyfin-web/dist
+          key: jellyfin-web-dist-${{ steps.latestrelease.outputs.releasetag }}-${{ hashFiles('jellyfin-web/package-lock.json') }}
+
+      - name: Build jellyfin-web
+        if: steps.cache-web-dist.outputs.cache-hit != 'true'
+        run: |
+          cd jellyfin-web
+          npm ci --no-audit
+          USE_SYSTEM_FONTS=1 npm run build:production
+
+      - name: Build jellyfin-tizen
+        run: |
+          cd jellyfin-tizen
+          JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+
+      - name: Build package
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+
+      - name: Package WGT
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen package -t wgt -o ./release -- .buildResult
+          
+      - name: Print job summary
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
+          ## Package Signing Required
+
+          The `Jellyfin.wgt` package is **not signed**.
+
+          ### To sign the package:
+    
+          1. Download the `Jellyfin.wgt` artifact from this workflow run
+          2. Run the following command:
+          
+          ```bash
+          tizen package -t wgt -s MyProfile -- Jellyfin.wgt
+          ```
+          EOF
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: Jellyfin
+          path: jellyfin-tizen/release/Jellyfin.wgt
