@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  TIZEN_STUDIO_URL: https://download.tizen.org/sdk/Installer/tizen-studio_$TIZEN_STUDIO_VER/web-cli_Tizen_Studio_$TIZEN_STUDIO_VER_ubuntu-64.bin
+  TIZEN_STUDIO_VER: 6.1
 
 jobs:
   build:
