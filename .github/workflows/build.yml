@@ -1,0 +1,79 @@
+name: Build WGT
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  TIZEN_STUDIO_URL: https://download.tizen.org/sdk/Installer/tizen-studio_$TIZEN_STUDIO_VER/web-cli_Tizen_Studio_$TIZEN_STUDIO_VER_ubuntu-64.bin
+
+jobs:
+  build:
+    name: Build Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Tizen-Studio
+        run: |
+          curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
+
+      - name: Install Tizen-Studio
+        run: |
+          chmod +x tizen-installer
+          ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
+          rm ./tizen-installer
+          echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
+
+      - name: Clone jellyfin-tizen
+        uses: actions/checkout@v6
+        with:
+          repository: 'jellyfin/jellyfin-tizen'
+          path: 'jellyfin-tizen'
+          ref: 'master'
+
+      - name: Get latest jellyfin-web release
+        id: latestrelease
+        run: |
+          echo "::set-output name=releasetag::$(curl -s https://api.github.com/repos/jellyfin/jellyfin-web/releases/latest | jq '.tag_name' | sed 's/\"//g')"
+
+      - name: confirm release tag
+        run: |
+          echo ${{ steps.latestrelease.outputs.releasetag }}
+
+      - name: Clone jellyfin-web
+        uses: actions/checkout@v6
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          path: 'jellyfin-web'
+          ref: ${{ steps.latestrelease.outputs.releasetag }}
+
+      - name: Build jellyfin-web
+        run: |
+          cd jellyfin-web
+          npm ci --no-audit
+          USE_SYSTEM_FONTS=1 npm run build:production
+
+      - name: Build jellyfin-tizen
+        run: |
+          cd jellyfin-tizen
+          JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+
+      - name: Build package
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+
+      - name: Package WGT
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen package -t wgt -o ./release -s Jellyfin -- .buildResult
+
+      - name: Print logs
+        if: always()
+        run: cat ./tizen-studio-data/cli/logs/cli.log
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: Jellyfin
+          path: jellyfin-tizen/release/Jellyfin.wgt
