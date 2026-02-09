@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  TIZEN_STUDIO_VER: 6.1
+  TIZEN_STUDIO_VER: 4.5.1
 
 jobs:
   build:
