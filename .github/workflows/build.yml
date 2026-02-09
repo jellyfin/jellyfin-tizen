@@ -36,10 +36,6 @@ jobs:
         run: |
           echo "releasetag=$(curl -s https://api.github.com/repos/jellyfin/jellyfin-web/releases/latest | jq '.tag_name' | sed 's/\"//g')" >> "$GITHUB_OUTPUT"
 
-      - name: confirm release tag
-        run: |
-          echo ${{ steps.latestrelease.outputs.releasetag }}
-
       - name: Clone jellyfin-web
         uses: actions/checkout@v6
         with:
@@ -67,10 +63,6 @@ jobs:
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen package -t wgt -o ./release -- .buildResult
-
-      - name: Print logs
-        if: always()
-        run: cat ./tizen-studio-data/cli/logs/cli.log
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v6
