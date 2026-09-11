@@ -121,7 +121,16 @@
 
             getDeviceProfile: function (profileBuilder) {
                 postMessage('AppHost.getDeviceProfile');
-                return profileBuilder({ enableMkvProgressive: false, enableSsaRender: true });
+                var profile = profileBuilder({ enableMkvProgressive: false, enableSsaRender: true });
+
+                // Samsung TVs claim opus support in canPlayType, but the decoder fails on
+                // real files (jellyfin-tizen#130, #217). Drop the opus/ogg audio direct-play
+                // claims so the server transcodes to a codec the TV can actually decode.
+                profile.DirectPlayProfiles = profile.DirectPlayProfiles.filter(function (p) {
+                    return !(p.Type === 'Audio' && ['opus', 'ogg', 'oga'].indexOf(p.Container) !== -1);
+                });
+
+                return profile;
             },
 
             getSyncProfile: function (profileBuilder) {
