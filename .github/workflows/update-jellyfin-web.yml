@@ -38,7 +38,15 @@ jobs:
 
     - name: Bump version
       if: steps.web.outputs.latest != steps.web.outputs.current
-      run: echo "${{ steps.web.outputs.latest }}" > .jellyfin-web-version
+      env:
+        LATEST: ${{ steps.web.outputs.latest }}
+      run: |
+        echo "$LATEST" > .jellyfin-web-version
+        # App version follows Jellyfin Web: v12.4 -> 12.4.0 (the third number
+        # is left for Tizen-only revisions, e.g. 12.4.1).
+        app_version=$(.github/scripts/app-version.sh "$LATEST")
+        sed -i -E "/<widget /s/ version=\"[^\"]*\"/ version=\"$app_version\"/" config.xml
+        grep -q "version=\"$app_version\"" config.xml
 
     - name: Open pull request
       if: steps.web.outputs.latest != steps.web.outputs.current
