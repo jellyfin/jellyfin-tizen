@@ -1,0 +1,63 @@
+name: Update Jellyfin Web
+
+# Opens (or refreshes) a pull request when a newer Jellyfin Web release is
+# published, so the version the app is built against stays current.
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    name: Check for a newer Jellyfin Web release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    - name: Compare versions
+      id: web
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        latest=$(gh api repos/jellyfin/jellyfin-web/releases/latest --jq .tag_name)
+        current=$(tr -d '[:space:]' < .jellyfin-web-version)
+        echo "Current: $current, latest: $latest"
+        if [ -z "$latest" ]; then
+          echo "::error::Could not read the latest Jellyfin Web release"
+          exit 1
+        fi
+        echo "latest=$latest" >> "$GITHUB_OUTPUT"
+        echo "current=$current" >> "$GITHUB_OUTPUT"
+
+    - name: Bump version
+      if: steps.web.outputs.latest != steps.web.outputs.current
+      env:
+        LATEST: ${{ steps.web.outputs.latest }}
+      run: |
+        echo "$LATEST" > .jellyfin-web-version
+        # App version follows Jellyfin Web: v12.4 -> 12.4.0 (the third number
+        # is left for Tizen-only revisions, e.g. 12.4.1).
+        app_version=$(.github/scripts/app-version.sh "$LATEST")
+        sed -i -E "/<widget /s/ version=\"[^\"]*\"/ version=\"$app_version\"/" config.xml
+        grep -q "version=\"$app_version\"" config.xml
+
+    - name: Open pull request
+      if: steps.web.outputs.latest != steps.web.outputs.current
+      uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
+      with:
+        branch: update/jellyfin-web
+        delete-branch: true
+        commit-message: Update Jellyfin Web to ${{ steps.web.outputs.latest }}
+        title: Update Jellyfin Web to ${{ steps.web.outputs.latest }}
+        body: |
+          A newer Jellyfin Web release is available: [${{ steps.web.outputs.latest }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ steps.web.outputs.latest }}) (currently ${{ steps.web.outputs.current }}).
+
+          Please build the WGT against this version and test it on a TV before merging.
+        labels: jellyfin-web
