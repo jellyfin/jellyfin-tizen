@@ -26,9 +26,14 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
    > It is recommended that the web version match the server version.
 
    ```sh
-   git clone -b release-10.10.z https://github.com/jellyfin/jellyfin-web.git
+   git clone -b release-12.z https://github.com/jellyfin/jellyfin-web.git
    ```
-   > Replace `release-10.10.z` with the name of the branch you want to build.
+   > Replace `release-12.z` with the name of the branch you want to build.
+
+   > Jellyfin 12.0+ disables the legacy authorization methods by default (`EnableLegacyAuthorization`).
+   > Builds made from an older Jellyfin Web branch still use them (e.g. the `api_key` query parameter),
+   > so against a 12.x server remote control (the WebSocket is refused), fullscreen photos and sign-in can fail.
+   > Build from `release-12.z` or newer for 12.x servers.
 
    > You can also use `git checkout` to switch branches.
 5. Clone or download Jellyfin Tizen (this) repository.
